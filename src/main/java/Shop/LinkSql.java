@@ -1,3 +1,5 @@
+package Shop;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,6 +10,18 @@ import java.sql.SQLException;
  * @Version 1.0
  */
 public class LinkSql {
+
+    private Connection conn =null;
+
+    public LinkSql(String url,String user,String pass) throws  SQLException{
+        this.conn = DriverManager.getConnection(url,user,pass);
+        System.out.println(this.conn);
+    }
+
+    public Connection getConn() {
+            return this.conn;
+    }
+
     public static void main(String[] args) {
         String url = "jdbc:mysql://60.205.221.125:3306/world?serverTimezone=UTC&useSSL=false";
         String user = "root";
@@ -19,7 +33,6 @@ public class LinkSql {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
     }
 }
