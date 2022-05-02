@@ -23,7 +23,7 @@ public class LinkSql {
     }
 
     public static void main(String[] args) {
-        String url = "jdbc:mysql://60.205.221.125:3306/world?serverTimezone=UTC&useSSL=false";
+        String url = "jdbc:mysql://localhost:3306/teashop?serverTimezone=UTC&useSSL=false";
         String user = "root";
         String pass = "ShuXue_7";
         Connection conn = null;

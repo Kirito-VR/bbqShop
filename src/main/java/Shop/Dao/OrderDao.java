@@ -1,7 +1,5 @@
 package Shop.Dao;
 
-import Shop.Bean.Order;
-
 import java.util.Map;
 
 /**
