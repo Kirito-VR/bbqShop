@@ -1,13 +1,12 @@
 package Shop.Dao.GoodDaoImpl.CreateDao;
 
-import Shop.Bean.Good;
+import Shop.Bean.good;
 import Shop.Dao.GoodDao;
 import Shop.Dao.LinkSql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Map;
 
 /**
@@ -30,7 +29,7 @@ public class CreateDaoImpl implements GoodDao {
         this.conn = conn;
     }
 
-    public void CreateGood(Good good) throws SQLException {
+    public void CreateGood(good good) throws SQLException {
         String sqlMassage = "insert into good values(?,?,?);";
 
         // 读取good数据；
@@ -45,7 +44,7 @@ public class CreateDaoImpl implements GoodDao {
 
     }
 
-    public void updata(Good good) {
+    public void updata(good good) {
 
     }
 
