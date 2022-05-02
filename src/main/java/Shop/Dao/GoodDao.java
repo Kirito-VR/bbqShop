@@ -1,6 +1,6 @@
 package Shop.Dao;
 
-import Shop.Bean.Good;
+import Shop.Bean.good;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  * @Version 1.0
  */
 public interface GoodDao {
-    public void CreateGood(Good good) throws SQLException;
-    public void updata(Good good);
+    public void CreateGood(good good) throws SQLException;
+    public void updata(good good);
     public Map select(Map map);
 }
