@@ -1,4 +1,6 @@
 package Shop.Dao.OrderDaoImpl;
 
-class OrderDao {
+class OrderDaoImpl {
+
+
 }
