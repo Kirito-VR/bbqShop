@@ -5,7 +5,7 @@ import Shop.Dao.OrderDao;
 
 import java.util.Map;
 
-//创建订单实现
+//创建订单实现，创建订单，更新订单
 public class OrderDaoImpl implements OrderDao {
 
     public void updata(Order order) {
