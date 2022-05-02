@@ -23,6 +23,7 @@ public class CreateDaoImpl implements GoodDao {
         String user = "root";
         String pass = "ShuXue_7";
         this.conn = new LinkSql(jdbc_url,user,pass).getConn();
+        System.out.println("111");
     }
 
     public CreateDaoImpl(Connection conn) {
