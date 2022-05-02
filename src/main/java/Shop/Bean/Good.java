@@ -5,16 +5,17 @@ package Shop.Bean;
  * @Date: 2022/5/2 15:28
  * @Version 1.0
  */
-public class good {
-    private char id;
+public class Good {
+    private String id;
     private String name;
-    private int price;
+    private double price;
 
-    public char getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(char id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -26,11 +27,11 @@ public class good {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }
