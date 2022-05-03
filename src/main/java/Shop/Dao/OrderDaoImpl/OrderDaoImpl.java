@@ -2,21 +2,46 @@ package Shop.Dao.OrderDaoImpl;
 
 import Shop.Bean.Order;
 import Shop.Dao.OrderDao;
+import Shop.util.ConnectionHandler;
+import sun.net.ConnectionResetException;
 
-/**
- * @Author: Cqmax
- * @Date: 2022/5/3 15:59
- * @Version 1.0
- */
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class OrderDaoImpl implements OrderDao {
-
     @Override
     public void updata(Order order) {
-
+        remove(order);
+        create(order);
     }
-
     @Override
     public void create(Order order) {
+        Connection conn =null;
+        PreparedStatement preparedStatement=null;
+        try {//获取连接
+            conn = ConnectionHandler.getConn();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            preparedStatement=conn.prepareStatement("insert into Order values(?,?,?,?,?);");
+            preparedStatement.setString(1,order.getOid());
+            preparedStatement.setDouble(2,order.getAprice());
+            preparedStatement.setString(3,order.getPlace());
+            preparedStatement.setString(4,order.getInfo());
+            preparedStatement.setString(5,order.getTransaction_id());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            try {
+                conn.close();
+                preparedStatement.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 
