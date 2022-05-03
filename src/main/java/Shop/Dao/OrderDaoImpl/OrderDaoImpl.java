@@ -30,7 +30,7 @@ public class OrderDaoImpl implements OrderDao {
             throw new RuntimeException(e);
         }
         try {
-            preparedStatement=conn.prepareStatement("insert into Order values(?,?,?,?,?);");
+            preparedStatement=conn.prepareStatement("insert into `Order` values(?,?,?,?,?);");
             preparedStatement.setString(1,order.getOid());
             preparedStatement.setDouble(2,order.getAprice());
             preparedStatement.setString(3,order.getPlace());

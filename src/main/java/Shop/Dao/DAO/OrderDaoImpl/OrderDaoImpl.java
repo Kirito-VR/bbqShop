@@ -3,7 +3,7 @@ package Shop.Dao.DAO.OrderDaoImpl;
 
 import Shop.Bean.Order;
 import Shop.Dao.OrderDao;
-import Shop.util.ConnetionHandler;
+import Shop.util.ConnectionHandler;
 import sun.net.ConnectionResetException;
 
 import java.sql.Connection;
@@ -21,7 +21,7 @@ public class OrderDaoImpl implements OrderDao {
         Connection conn =null;
         PreparedStatement preparedStatement=null;
         try {//获取连接
-            conn = ConnetionHandler.getConn();
+            conn = ConnectionHandler.getConn();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
