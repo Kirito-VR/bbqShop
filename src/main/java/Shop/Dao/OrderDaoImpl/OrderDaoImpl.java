@@ -7,6 +7,7 @@ import sun.net.ConnectionResetException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -15,7 +16,7 @@ import java.sql.SQLException;
  */
 public class OrderDaoImpl implements OrderDao {
     @Override
-    public void updata(Order order) {
+    public void updata(Order order) throws SQLException {
         remove(order);
         create(order);
     }
