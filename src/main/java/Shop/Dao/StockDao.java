@@ -2,6 +2,7 @@ package Shop.Dao;
 
 import Shop.Bean.Stock;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Map;
  * @Version 1.0
  */
 public interface StockDao {
-    public void updata(String good_id,String amount);
-    public void create(String good_id,String amount);
+    public void update(String good_id,int amount) throws SQLException;
+    public void create(String good_id,int amount);
     public void Select(String good_id);
 }
