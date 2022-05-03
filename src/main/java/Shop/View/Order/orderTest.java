@@ -4,6 +4,8 @@ import Shop.Bean.Order;
 import Shop.Dao.OrderDao;
 import Shop.Dao.OrderDaoImpl.OrderDaoImpl;
 
+import java.sql.SQLException;
+
 /**
  * @Author: Cqmax
  * @Date: 2022/5/3 15:57
@@ -12,7 +14,11 @@ import Shop.Dao.OrderDaoImpl.OrderDaoImpl;
 public class orderTest {
     public void  showOrder(){
         OrderDao order = new OrderDaoImpl();
-        order.select(null);//如果为空，则为查询所有的order
+        try {
+            order.select(null);//如果为空，则为查询所有的order
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updataOrder(Order o){
@@ -22,6 +28,10 @@ public class orderTest {
 
     public void remove(Order oid){
         OrderDao order = new OrderDaoImpl();
-        order.remove(oid);
+        try {
+            order.remove(oid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
