@@ -1,5 +1,7 @@
 package Shop.Dao;
 
+import Shop.Bean.Stock;
+
 import java.util.Map;
 
 /**
@@ -9,5 +11,6 @@ import java.util.Map;
  */
 public interface StockDao {
     public void updata(String good_id,String amount);
-    public void select(String stock_id);
+    public void create(String good_id,String amount);
+    public void Select(String good_id);
 }
