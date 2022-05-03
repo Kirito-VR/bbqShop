@@ -17,5 +17,5 @@ public interface OrderDao {
     // 删除订单；
     public void remove(Order order);
     // 订单查询；
-    public Map select(Order order);
+
 }
