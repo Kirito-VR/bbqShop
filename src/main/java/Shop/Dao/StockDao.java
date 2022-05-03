@@ -13,4 +13,5 @@ public interface StockDao {
     public void updata(String good_id,String amount);
     public void create(String good_id,String amount);
     public void Select(String good_id);
+    public void Remove(String good_id);
 }

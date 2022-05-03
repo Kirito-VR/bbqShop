@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * @Date: 2022/5/3 12:17
  * @Version 1.0
  */
-public class ConnetionHandler {
+public class ConnectionHandler {
     public static ThreadLocal<Connection> connection = new ThreadLocal<>();
     public static Connection getConn() throws SQLException {
         String url = "jdbc:mysql://60.205.221.125:3306/bbq?serverTimezone=UTC&useSSL=false";
