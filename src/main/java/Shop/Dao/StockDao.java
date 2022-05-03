@@ -9,5 +9,5 @@ import java.util.Map;
  */
 public interface StockDao {
     public void updata(String good_id,String amount);
-    public Map select(Map map);
+    public void select(String stock_id);
 }

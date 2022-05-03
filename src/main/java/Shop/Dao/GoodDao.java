@@ -11,5 +11,6 @@ public interface GoodDao {
     public void updata(Good good);
     public void newGood(Good good);
     public void deleteGood(Good good);
+    public void  selectGood(Good good);
 
 }
