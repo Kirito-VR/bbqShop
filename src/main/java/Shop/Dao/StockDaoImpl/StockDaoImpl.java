@@ -25,24 +25,72 @@ public class StockDaoImpl implements StockDao{
             pstmt.executeUpdate();
 
 
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             throw new SQLException("库存更新失败");
+        }finally {
+            ConnectionHandler.connClose();
         }
     }
 
     @Override
-    public void Create(Stock stock) {
+    public void Create(Stock stock) throws SQLException {
+        Connection conn=null;
+        try {
+            conn= ConnectionHandler.getConn();
+            String sql="INSERT INTO Stock VALUES(?,?,?,?)";
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+
+            pstmt.setString(1, stock.getId());
+            pstmt.setString(2, stock.getName());
+            pstmt.setInt(3,stock.getAmount());
+            pstmt.setDouble(4,stock.getCost());
+            pstmt.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new SQLException("新增库存失败");
+        }finally {
+            ConnectionHandler.connClose();
+        }
 
     }
 
     @Override
-    public void Select(String good_id) {
+    public void Select(String good_id) throws SQLException {
+        Connection conn=null;
+        try {
+            conn=ConnectionHandler.getConn();
+            String sql="SELECT *FROM Stock WHERE good_id=?";
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,good_id);
+            pstmt.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new SQLException("库存中未找到该商品");
+        }finally {
+            ConnectionHandler.connClose();
+        }
 
     }
 
     @Override
-    public void Remove(String good_id) {
+    public void Remove(String good_id) throws SQLException {
+        Connection conn=null;
+        try {
+            conn=ConnectionHandler.getConn();
+            String sql="DELETE *FROM Stock WHERE good_id=?";
+            PreparedStatement pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1,good_id);
+            pstmt.executeUpdate();
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            throw new SQLException("该商品删除失败");
+        }finally {
+            ConnectionHandler.connClose();
+        }
     }
 }

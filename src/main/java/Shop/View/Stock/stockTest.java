@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @Version 1.0
  */
 public class stockTest {
-    public void  showStock(){
+    public void  showStock() throws SQLException {
         StockDao Stock = new StockDaoImpl();
         Stock.Select("");//如果为空，则为查询所有的Stock
     }
@@ -23,12 +23,12 @@ public class stockTest {
         Stock.Update(null,0);
     }
 
-    public void remove(Stock oid){
+    public void remove(Stock oid) throws SQLException {
         StockDao Stock = new StockDaoImpl();
         Stock.Remove(null);
     }
 
-    public void create(Stock o){
+    public void create(Stock o) throws SQLException {
         StockDao stock = new StockDaoImpl();
         stock.Create(o);
     }
