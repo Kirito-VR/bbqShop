@@ -13,9 +13,9 @@ import java.util.Scanner;
  * @Version 1.0
  */
 public class orderTest {
-    public void  showOrder() throws SQLException {
+    public void  showOrder(Order oid) throws SQLException {
         OrderDao order = new OrderDaoImpl();
-        order.select(null);//如果为空，则为查询所有的order
+        order.select(oid);//如果为空，则为查询所有的order
     }
 
     public void updataOrder(Order o) throws SQLException {
@@ -60,7 +60,7 @@ public class orderTest {
                 System.out.println("请输入操作:(1.展示；2.更新；3.删除;4.插入；5.退出)");
                 i = input.nextInt();
                 switch (i){
-                    case 1:order.showOrder();
+                    case 1:order.showOrder(newOrder(input));
                         break;
                     case 2:order.updataOrder(newOrder(input));
                         break;
@@ -70,7 +70,7 @@ public class orderTest {
                         break;
                     default:
                         break;
-            }
+                }
             }
         } catch (SQLException e){
             e.printStackTrace();

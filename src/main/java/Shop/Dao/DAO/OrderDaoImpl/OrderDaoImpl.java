@@ -4,7 +4,6 @@ package Shop.Dao.DAO.OrderDaoImpl;
 import Shop.Bean.Order;
 import Shop.Dao.OrderDao;
 import Shop.util.ConnectionHandler;
-import sun.net.ConnectionResetException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

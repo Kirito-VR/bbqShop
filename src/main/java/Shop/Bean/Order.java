@@ -9,6 +9,11 @@ public class Order {
     private String Info;
     private String transcation_id;
 
+    //无参构造函数
+//    public Order(){
+//
+//    }
+
     public String getOid() {
         return Oid;
     }
