@@ -1,0 +1,412 @@
+Index: src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Shop.Dao.GoodDaoImpl.CreateDao;\r\n\r\nimport Shop.Bean.Good;\r\nimport Shop.Dao.GoodDao;\r\nimport Shop.Dao.LinkSql;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.SQLException;\r\nimport java.util.Map;\r\n\r\n/**\r\n * @Author: Cqmax\r\n * @Date: 2022/4/24 10:15\r\n * @Version 1.0\r\n */\r\npublic class CreateDaoImpl implements GoodDao {\r\n    private Connection conn = null;\r\n\r\n    public CreateDaoImpl() throws SQLException {\r\n        String jdbc_url = \"jdbc:mysql://60.205.221.125:3306/Good?serverTimezone=UTC&useSSL=false\";\r\n        String user = \"root\";\r\n        String pass = \"ShuXue_7\";\r\n        this.conn = new LinkSql(jdbc_url,user,pass).getConn();\r\n        System.out.println(\"111\");\r\n    }\r\n\r\n    public CreateDaoImpl(Connection conn) {\r\n        this.conn = conn;\r\n    }\r\n\r\n    public void CreateGood(Good good) throws SQLException {\r\n        String sqlMassage = \"insert into good values(?,?,?);\";\r\n\r\n        // 读取good数据；\r\n\r\n        PreparedStatement ppsttmt = conn.prepareStatement(sqlMassage);\r\n\r\n        ppsttmt.setString(1,good.getId());\r\n        ppsttmt.setString(2,good.getName());\r\n        ppsttmt.setDouble(3,good.getPrice());\r\n\r\n\r\n\r\n    }\r\n\r\n    public void updata(Good good) {\r\n\r\n    }\r\n\r\n    public Map select(Map map) {\r\n        return null;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java b/src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java
+--- a/src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java	(revision 2a881a693fce5449b056e51e7734f97f22afe913)
++++ b/src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java	(date 1651491523584)
+@@ -18,7 +18,7 @@
+     private Connection conn = null;
+ 
+     public CreateDaoImpl() throws SQLException {
+-        String jdbc_url = "jdbc:mysql://60.205.221.125:3306/Good?serverTimezone=UTC&useSSL=false";
++        String jdbc_url = "jdbc:mysql://60.205.221.125:3306/bbq?serverTimezone=UTC&useSSL=false";
+         String user = "root";
+         String pass = "ShuXue_7";
+         this.conn = new LinkSql(jdbc_url,user,pass).getConn();
+Index: bbqShop.iml
+===================================================================
+diff --git a/bbqShop.iml b/bbqShop.iml
+deleted file mode 100644
+--- a/bbqShop.iml	(revision 2a881a693fce5449b056e51e7734f97f22afe913)
++++ /dev/null	(revision 2a881a693fce5449b056e51e7734f97f22afe913)
+@@ -1,11 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$">
+-      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+-    </content>
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: .idea/modules.xml
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+deleted file mode 100644
+--- a/.idea/modules.xml	(revision 2a881a693fce5449b056e51e7734f97f22afe913)
++++ /dev/null	(revision 2a881a693fce5449b056e51e7734f97f22afe913)
+@@ -1,8 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/bbqShop.iml" filepath="$PROJECT_DIR$/bbqShop.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: src/main/java/Shop/Dao/impl/GoodDaoImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/impl/GoodDaoImpl.java b/src/main/java/Shop/Dao/impl/GoodDaoImpl.java
+new file mode 100644
+--- /dev/null	(date 1651561445338)
++++ b/src/main/java/Shop/Dao/impl/GoodDaoImpl.java	(date 1651561445338)
+@@ -0,0 +1,184 @@
++package Shop.Dao.impl;
++
++import java.awt.*;
++import Shop.Bean.Good;
++
++import java.awt.*;
++import java.sql.*;
++import java.util.ArrayList;
++import javax.swing.*;
++import javax.swing.table.DefaultTableModel;
++
++
++/**
++ * @srf
++ */
++public class GoodDaoImpl<UpdateGood> extends JFrame {
++    public GoodDaoImpl() {
++        initComponents();
++    }
++
++    private void initComponents() {
++        scrollPane1 = new JScrollPane();
++        table1 = new JTable();
++        button1 = new JButton();
++        button2 = new JButton();
++        button3 = new JButton();
++        button4 = new JButton();
++        label1 = new JLabel();
++        textField1 = new JTextField();
++
++        DefaultTableModel tableModel = new DefaultTableModel(getDataFromDatabase(), head) {
++            public boolean isCellEditable(int row, int column) {
++                return false;
++            }
++        };
++        table1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
++        table1.setModel(tableModel);
++
++        JPanel contentPane = (JPanel) getContentPane();
++        contentPane.setLayout(null);
++
++        label1.setFont(new
++                Font("STHeiti Light", Font.BOLD,
++                30));
++        label1.setText("点单表");
++        contentPane.add(label1);
++        label1.setBounds(460, 0, 600, 60);
++
++        button1.setText("删除");
++        contentPane.add(button1);
++        button1.setBounds(510, 355, 100, 30);
++
++        /*button2.setText("新增");
++        contentPane.add(button2);
++        button2.setBounds(610, 355, 100, 30);
++        button2.addActionListener(
++                (e)->{
++                    Sel sel=new Sel();
++                    sel.setVisible(true);
++
++                }
++        );*/
++
++       /* button3.setText("修改");
++        contentPane.add(button3);
++        button3.setBounds(710, 355, 100, 30);
++        button3.addActionListener(
++                (e)->{
++                    int rowNo = table1.getSelectedRow();//获取所选的行号
++                    int id=(int)table1.getValueAt(rowNo, 0);
++                    String title=(String)table1.getValueAt(rowNo, 1);
++                    Float price=(Float)table1.getValueAt(rowNo, 2);
++                    String description=(String)table1.getValueAt(rowNo, 3);
++                    int sales=(int)table1.getValueAt(rowNo, 4);
++                    String img_url=(String)table1.getValueAt(rowNo, 5);
++                    System.out.println(id);
++                    System.out.println(title);
++                    System.out.println(price);
++                    System.out.println(description);
++                    System.out.println(sales);
++                    System.out.println(img_url);
++
++
++                    Good good=new Good(id,name,price);
++
++                    UpdateGood updateItem=new UpdateGood(good);
++                    updateGood.setVisible(true);
++                }
++        );*/
++
++        contentPane.add(textField1);
++        textField1.setBounds(270, 355, 130, 30);
++
++        button4.setText("查询");
++        contentPane.add(button4);
++        button4.setBounds(410, 355, 100, 30);
++
++        {
++            scrollPane1.setViewportView(table1);
++        }
++        contentPane.add(scrollPane1);
++        scrollPane1.setBounds(0, 50, 1000, 300);
++        {
++            Dimension preferredSize = new Dimension();
++            for (int i = 0; i < contentPane.getComponentCount(); i++) {
++                Rectangle bounds = contentPane.getComponent(i).getBounds();
++                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
++                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
++            }
++            Insets insets = contentPane.getInsets();
++            preferredSize.width += insets.right;
++            preferredSize.height += insets.bottom;
++            contentPane.setMinimumSize(preferredSize);
++            contentPane.setPreferredSize(preferredSize);
++        }
++        pack();
++        setLocationRelativeTo(getOwner());
++        this.setBounds(300, 300, 1000, 415);
++        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++    }
++
++    public Object[][] getDataFromDatabase() {
++
++        java.util.List<Good> list = new ArrayList<Good>();
++        Connection conn = null;
++        String user = "root";
++        String dbPassword = "ShuXue_7";
++        String url = "jdbc:mysql://bbq:3306/bbq?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
++        Statement stmt = null;
++        String sql = "SELECT * FROM good";
++        ResultSet rs = null;
++        try {
++            conn = DriverManager.getConnection(url, user, dbPassword);
++            stmt = conn.createStatement();
++            rs = stmt.executeQuery(sql);
++            while (rs.next()) {
++                Good good = new Good();
++                good.setId(rs.getString(1));
++                good.setName(rs.getString(2));
++                good.setPrice(rs.getFloat(3));
++
++                list.add(good);
++            }
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++        } finally {
++            try {
++                rs.close();
++                stmt.close();
++                conn.close();
++            } catch (SQLException throwables) {
++                throwables.printStackTrace();
++            }
++
++        }
++        // 把集合的数据（商品信息）转换成二维数组
++        data = new Object[list.size()][head.length];
++
++        for (int i = 0; i < list.size(); i++) {
++            for (int j = 0; j < head.length; j++) {
++                data[i][0] = list.get(i).getId();
++                data[i][1] = list.get(i).getName();
++                data[i][2] = list.get(i).getPrice();
++
++            }
++        }
++        return data;
++    }
++
++    private JScrollPane scrollPane1;
++    private JTable table1;
++    private String head[] = {"id", "商品名称", "单价"};
++    private Object[][] data = null;
++    private JButton button1;
++    private JButton button2;
++    private JButton button3;
++    private JButton button4;
++    private JTextField textField1;
++    private JLabel label1;
++
++    public static void main(String[] args) {
++        new GoodDaoImpl();
++    }
++}
+\ No newline at end of file
+Index: src/main/java/Shop/Bean/Good.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Shop.Bean;\r\n\r\n/**\r\n * @Author: srf\r\n * @Date: 2022/5/2 15:28\r\n * @Version 1.0\r\n */\r\npublic class Good {\r\n    private String id;\r\n    private String name;\r\n    private double price;\r\n\r\n\r\n    public String getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(String id) {\r\n        this.id = id;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public double getPrice() {\r\n        return price;\r\n    }\r\n\r\n    public void setPrice(double price) {\r\n        this.price = price;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Bean/Good.java b/src/main/java/Shop/Bean/Good.java
+--- a/src/main/java/Shop/Bean/Good.java	(revision 2a881a693fce5449b056e51e7734f97f22afe913)
++++ b/src/main/java/Shop/Bean/Good.java	(date 1651491523550)
+@@ -10,7 +10,6 @@
+     private String name;
+     private double price;
+ 
+-
+     public String getId() {
+         return id;
+     }
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile name=\"Maven default annotation processors profile\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <module name=\"project_1\" />\r\n        <module name=\"bbqShop\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 2a881a693fce5449b056e51e7734f97f22afe913)
++++ b/.idea/compiler.xml	(date 1651580989912)
+@@ -10,5 +10,6 @@
+         <module name="bbqShop" />
+       </profile>
+     </annotationProcessing>
++    <bytecodeTargetLevel target="7" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/Shop/Dao/impl/Login.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/impl/Login.java b/src/main/java/Shop/Dao/impl/Login.java
+new file mode 100644
+--- /dev/null	(date 1651562347614)
++++ b/src/main/java/Shop/Dao/impl/Login.java	(date 1651562347614)
+@@ -0,0 +1,116 @@
++package Shop.Dao.impl;
++
++import com.sun.deploy.panel.RuleSetViewerDialog;
++
++import java.awt.*;
++import java.sql.*;
++import javax.swing.*;
++/*
++ * Created by JFormDesigner on Sat Apr 02 15:41:52 CST 2022
++ */
++
++
++/**
++ * @author 1
++ */
++public class Login extends JFrame {
++    public Login() {
++        initComponents();
++    }
++
++    private void initComponents() {
++        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
++        label1 = new JLabel();
++        textField1 = new JTextField("guet");
++        label2 = new JLabel();
++        textField2 = new JTextField("guet1234");
++        button1 = new JButton();
++
++        //======== this ========
++        Container contentPane = getContentPane();
++        contentPane.setLayout(null);
++
++        //---- label1 ----
++        label1.setText("\u7528\u6237\u540d\uff1a");
++        contentPane.add(label1);
++        label1.setBounds(new Rectangle(new Point(115, 90), label1.getPreferredSize()));
++        contentPane.add(textField1);
++        textField1.setBounds(185, 85, 100, textField1.getPreferredSize().height);
++
++        //---- label2 ----
++        label2.setText("\u5bc6\u7801\uff1a");
++        contentPane.add(label2);
++        label2.setBounds(new Rectangle(new Point(120, 125), label2.getPreferredSize()));
++        contentPane.add(textField2);
++        textField2.setBounds(185, 120, 100, textField2.getPreferredSize().height);
++
++        //---- button1 ----
++        button1.addActionListener(
++                (e) -> {
++                    /*
++                    1、拿到登录界面的用户名和密码
++                    2、去和数据库中的用户名和密码比对
++                    3、创建了数据库和表
++                    4、添加一条记录
++                    INSERT INTO sys_user (id,name,password) VALUES(1111,'guet','guet1234');
++                     */
++                    String username = textField1.getText();
++                    String password = textField2.getText();
++
++                    String user = "root";
++                    String dbPassword = "123456";
++                    String url = "jdbc:mysql://localhost:3306/srf?serverTimezone=UTC&useSSL=false";
++
++                    Connection conn = null;
++                    // 拼sql，容易有注入攻击
++                    String sql = "SELECT * FROM sys_user WHERE username='" + username + "' AND password='" + password + "'";
++                    System.out.println(sql);
++                    ResultSet rs = null;//结果集：内存，存储了查询到的数据；内存区有一个游标，执行完查询的时候，不指向任何记录
++                    Statement stmt = null;//语句对象，容易产生注入攻击
++
++                    try {
++                        conn = DriverManager.getConnection(url, user, dbPassword);
++
++                        stmt = conn.createStatement();
++                        rs = stmt.executeQuery(sql);
++                        if (rs.next()) {//让游标向下移动一次
++                            System.out.println("登录成1功");
++                            this.setVisible(false);
++
++                            GoodDaoImpl good =new GoodDaoImpl();
++                            good.setVisible(true);
++                           /* Main main=new Main();
++                            main.setVisible(true);*/
++
++
++                        } else {
++                            System.out.println("用户名或密码错误");
++                        }
++                    } catch (SQLException ex) {
++                        ex.printStackTrace();
++                    }
++                }
++        );
++        button1.setText("\u767b\u5f55");
++        contentPane.add(button1);
++        button1.setBounds(new Rectangle(new Point(170, 185), button1.getPreferredSize()));
++
++
++        contentPane.setPreferredSize(new Dimension(400, 300));
++        pack();
++        setLocationRelativeTo(getOwner());
++        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
++        this.setResizable(false);
++        this.setVisible(true);//设置组件可见
++    }
++
++    private JLabel label1;
++    private JTextField textField1;
++    private JLabel label2;
++    private JTextField textField2;
++    private JButton button1;
++
++    public static void main(String[] args) {
++        new Login();
++    }
++}
+\ No newline at end of file
