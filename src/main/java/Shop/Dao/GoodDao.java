@@ -8,9 +8,13 @@ import Shop.Bean.Good;
  * @Version 1.0
  */
 public interface GoodDao {
-    public void updata(Good good);
-    public void newGood(Good good);
-    public void deleteGood(Good good);
-    public void  selectGood(Good good);
+    // 更新商品信息
+    public void Updata(Good good);
+    // 新增商品
+    public void Create(Good good);
+    // 删除商品
+    public void Remove(Good good);
+    // 查询商品
+    public void  Select(Good good);
 
 }

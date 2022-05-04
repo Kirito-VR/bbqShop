@@ -15,22 +15,22 @@ import java.util.Scanner;
 public class orderTest {
     public void  showOrder(Order oid) throws SQLException {
         OrderDao order = new OrderDaoImpl();
-        order.select(oid);//如果为空，则为查询所有的order
+        order.Select(oid);//如果为空，则为查询所有的order
     }
 
     public void updataOrder(Order o) throws SQLException {
         OrderDao order = new OrderDaoImpl();
-        order.updata(o);
+        order.Updata(o);
     }
 
     public void remove(Order oid) throws SQLException {
         OrderDao order = new OrderDaoImpl();
-        order.remove(oid);
+        order.Remove(oid);
     }
 
     public void create(Order o){
         OrderDao order = new OrderDaoImpl();
-        order.create(o);
+        order.Create(o);
     }
 
     public static Order newOrder(Scanner input){
@@ -60,7 +60,7 @@ public class orderTest {
                 System.out.println("请输入操作:(1.展示；2.更新；3.删除;4.插入；5.退出)");
                 i = input.nextInt();
                 switch (i){
-                    case 1:order.showOrder(newOrder(input));
+                    case 1:order.showOrder(null);
                         break;
                     case 2:order.updataOrder(newOrder(input));
                         break;

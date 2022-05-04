@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class StockDaoImpl implements StockDao{
 
     @Override
-    public void update(String good_id, int amount) throws SQLException {
+    public void Update(String good_id, int amount) throws SQLException {
         Connection conn=null;
         conn= ConnectionHandler.getConn();
         System.out.println("StockDao:" + conn);
@@ -32,7 +32,7 @@ public class StockDaoImpl implements StockDao{
     }
 
     @Override
-    public void create(Stock stock) {
+    public void Create(Stock stock) {
 
     }
 

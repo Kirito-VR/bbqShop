@@ -15,17 +15,17 @@ import java.util.Scanner;
 public class goodTest {
     public void  showGood() throws SQLException {
         GoodDao Good = new GoodDaoImpl();
-        Good.selectGood(null);//如果为空，则为查询所有的Good
+        Good.Select(null);//如果为空，则为查询所有的Good
     }
 
     public void updataGood(Good o) throws SQLException {
         GoodDao Good = new GoodDaoImpl();
-        Good.updata(o);
+        Good.Updata(o);
     }
 
     public void remove(Good id) throws SQLException {
         GoodDao Good = new GoodDaoImpl();
-        Good.deleteGood(id);
+        Good.Remove(id);
     }
 
     public static Good newGood(Scanner input){

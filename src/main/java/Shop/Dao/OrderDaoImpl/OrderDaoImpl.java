@@ -12,13 +12,13 @@ import java.sql.*;
  */
 public class OrderDaoImpl implements OrderDao {
     @Override
-    public void updata(Order order) throws SQLException {
-        remove(order);
-        create(order);
+    public void Updata(Order order) throws SQLException {
+        Remove(order);
+        Create(order);
     }
 
     @Override
-    public void create(Order order) {
+    public void Create(Order order) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         try {//获取连接
@@ -49,15 +49,16 @@ public class OrderDaoImpl implements OrderDao {
 
     //删除函数
     @Override
-    public void remove(Order order) throws SQLException {
+    public void Remove(Order order) throws SQLException {
 
         Connection conn = ConnectionHandler.getConn();
         System.out.println("OrderDao:" + conn);
         try {
-            String sql = "delete from `Order` where Oid="+order.getOid();
+            String sql = "delete from `Order` where Oid=？";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             Boolean bool;
+            pstmt.setString(1,order.getOid());
             bool = pstmt.execute(sql);  //执行SQL语句
             System.out.println(bool);  //没有返回结果集所以打印false
 
@@ -72,7 +73,7 @@ public class OrderDaoImpl implements OrderDao {
 
     //查询函数
     @Override
-    public void select(Order order) throws SQLException {
+    public void Select(Order order) throws SQLException {
 
         Connection conn = ConnectionHandler.getConn();
         System.out.println("OrderDao:" + conn);
