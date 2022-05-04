@@ -3,12 +3,10 @@ package Shop.Dao.OrderDaoImpl;
 import Shop.Bean.Order;
 import Shop.Dao.OrderDao;
 import Shop.util.ConnectionHandler;
+import org.ietf.jgss.Oid;
 import sun.net.ConnectionResetException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * @author ludh
@@ -56,7 +54,7 @@ public class OrderDaoImpl implements OrderDao {
         Connection conn = ConnectionHandler.getConn();
         System.out.println("OrderDao:"+conn);
         try {
-            String sql="delete from Order where Oid=?";
+            String sql="delete from `Order` where Oid=?";
 
             PreparedStatement pstmt=conn.prepareStatement(sql);
             Boolean bool;
@@ -78,13 +76,25 @@ public class OrderDaoImpl implements OrderDao {
 
         Connection conn = ConnectionHandler.getConn();
         System.out.println("OrderDao:"+conn);
-        try {
-            String sql="select * from Order where Oid=?";
 
-            PreparedStatement pstmt=conn.prepareStatement(sql);
+        String sql="select * from `Order` ";
+        try {
+            PreparedStatement pstmt=null;
             ResultSet rs =null;
+
+            pstmt = conn.prepareStatement(sql);
+            //pstmt.setString(1,order.getOid());
+
             rs = pstmt.executeQuery();
-            System.out.println(rs);  //输出查询
+            while (rs.next()){
+                System.out.print(rs.getString("Oid")+" ");
+                System.out.print(rs.getDouble("Aprice")+" ");
+                System.out.print(rs.getString("Place")+" ");
+                System.out.print(rs.getString("Info")+" ");
+                System.out.println(rs.getString("transcation_id")+" ");
+
+            }
+
 
             //conn.commit();
 
