@@ -20,6 +20,8 @@ import java.util.List;
 public class GoodDaoImpl implements GoodDao {
     @Override
     public void Updata(Good good) {
+        Remove(good);
+        Create(good);
 
     }
 
