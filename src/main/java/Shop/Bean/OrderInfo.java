@@ -16,7 +16,7 @@ public class OrderInfo {
         Id = id;
     }
 
-    public void setOrderIde(String orderIde) {
+    public void setOrderId(String orderIde) {
         this.orderIde = orderIde;
     }
 
@@ -32,7 +32,7 @@ public class OrderInfo {
         return Id;
     }
 
-    public String getOrderIde() {
+    public String getOrderId() {
         return orderIde;
     }
 
