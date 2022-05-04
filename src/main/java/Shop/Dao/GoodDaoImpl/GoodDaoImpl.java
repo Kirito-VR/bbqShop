@@ -34,6 +34,7 @@ public class GoodDaoImpl implements GoodDao {
             pstmt.setString(1,good.getId());
             pstmt.setString(1,good.getName());
             pstmt.setDouble(1,good.getPrice());
+            pstmt.executeUpdate();
 
 
         } catch (SQLException e) {
