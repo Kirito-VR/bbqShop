@@ -47,25 +47,45 @@ public class GoodDaoImpl implements GoodDao {
     }
 
     @Override
-    public void Select(Good good) {
+    public List<Good> Select(Good good) {
         Connection conn = null;
-
+        List<Good> list = new ArrayList<>();
         try {
-            List<Good> list = new ArrayList<>();
+
             conn = ConnectionHandler.getConn();
-            String sql = "SELECT * FROM good WHERE id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,good.getId());
-            ResultSet set = pstmt.executeQuery();
-            while(set.next()){
-                Good temp = new Good();
-                temp.setId(set.getString("id"));
-                temp.setName(set.getString("name"));
-                temp.setPrice(set.getDouble("price"));
+            if(good != null){
+                String sql = "SELECT * FROM good WHERE id = ?";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1,good.getId());
+                ResultSet set = pstmt.executeQuery();
+                while(set.next()){
+                    Good temp = new Good();
+                    temp.setId(set.getString("id"));
+                    temp.setName(set.getString("name"));
+                    temp.setPrice(set.getDouble("price"));
+                    list.add(temp);
+                }
+                return list;
+
+            }else {
+                String sql = "SELECT * FROM good";
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                ResultSet set = pstmt.executeQuery();
+                while(set.next()){
+                    Good temp = new Good();
+                    temp.setId(set.getString("id"));
+                    temp.setName(set.getString("name"));
+                    temp.setPrice(set.getDouble("price"));
+                    list.add(temp);
+                }
+                return list;
             }
+
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return list;
     }
 }

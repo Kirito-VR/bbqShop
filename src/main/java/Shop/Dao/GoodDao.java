@@ -2,6 +2,8 @@ package Shop.Dao;
 
 import Shop.Bean.Good;
 
+import java.util.List;
+
 /**
  * @Author: Cqmax
  * @Date: 2022/5/3 12:45
@@ -15,6 +17,6 @@ public interface GoodDao {
     // 删除商品
     public void Remove(Good good);
     // 查询商品
-    public void  Select(Good good);
+    public List<Good> Select(Good good);
 
 }

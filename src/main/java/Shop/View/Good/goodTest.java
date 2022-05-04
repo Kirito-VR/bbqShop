@@ -5,6 +5,7 @@ import Shop.Dao.GoodDao;
 import Shop.Dao.GoodDaoImpl.GoodDaoImpl;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,13 @@ import java.util.Scanner;
 public class goodTest {
     public void  showGood() throws SQLException {
         GoodDao Good = new GoodDaoImpl();
-        Good.Select(null);//如果为空，则为查询所有的Good
+        Good good = null;
+        List<Good> list =  Good.Select(null);//如果为空，则为查询所有的Good
+        for(int i = 0;i<list.size();i++){
+            good = list.get(i);
+            System.out.println(good);
+        }
+
     }
 
     public void updataGood(Good o) throws SQLException {
@@ -42,12 +49,14 @@ public class goodTest {
 
     public static void main(String[] args) {
         goodTest Good = new goodTest();
-        System.out.println("请输入操作:(1.展示；2.更新；3.删除;4.退出)");
+
         Scanner input = new Scanner(System.in);
-        int i = input.nextInt();
+        int i = 0;
 
         try {
             while(i!=5){
+                System.out.println("请输入操作:(1.展示；2.更新；3.删除;4.插入；5.退出)");
+                i = input.nextInt();
                 switch (i){
                     case 1:Good.showGood();
                         break;

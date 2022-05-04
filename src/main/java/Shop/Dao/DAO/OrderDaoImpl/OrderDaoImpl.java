@@ -11,12 +11,12 @@ import java.sql.SQLException;
 
 public class OrderDaoImpl implements OrderDao {
     @Override
-    public void updata(Order order) {
-        remove(order);
-        create(order);
+    public void Updata(Order order) {
+        Remove(order);
+        Create(order);
     }
     @Override
-    public void create(Order order) {
+    public void Create(Order order) {
         Connection conn =null;
         PreparedStatement preparedStatement=null;
         try {//获取连接
@@ -46,12 +46,12 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void remove(Order order) {
+    public void Remove(Order order) {
 
     }
 
     @Override
-    public void select(Order order) {
+    public void Select(Order order) {
 
     }
 }
