@@ -2,6 +2,7 @@ package Shop.Dao;
 
 import Shop.Bean.Order;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -11,11 +12,12 @@ import java.util.Map;
  */
 public interface OrderDao {
     // 更新，修改订单
-    public void updata(Order order);
+    public void updata(Order order) throws SQLException;
     // 新建订单；
     public void create(Order order);
     // 删除订单；
-    public void remove(Order order);
+    public void remove(Order order) throws SQLException;
     // 订单查询；
-    public Map select(Order order);
+    public void select(Order order) throws SQLException;
+
 }
