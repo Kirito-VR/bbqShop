@@ -1,5 +1,6 @@
 package Shop.Dao.StockDaoImpl;
 
+import Shop.Bean.Stock;
 import Shop.Dao.StockDao;
 import Shop.util.ConnectionHandler;
 
@@ -31,7 +32,7 @@ public class StockDaoImpl implements StockDao{
     }
 
     @Override
-    public void create(String good_id, int amount) {
+    public void create(Stock stock) {
 
     }
 

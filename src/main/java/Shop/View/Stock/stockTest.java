@@ -5,6 +5,7 @@ import Shop.Dao.StockDao;
 import Shop.Dao.StockDaoImpl.StockDaoImpl;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /**
  * @Author: Cqmax
@@ -25,5 +26,54 @@ public class stockTest {
     public void remove(Stock oid){
         StockDao Stock = new StockDaoImpl();
         Stock.Remove(null);
+    }
+
+    public void create(Stock o){
+        StockDao stock = new StockDaoImpl();
+        stock.create(o);
+    }
+
+    public static Stock newStock(Scanner input){
+        Stock Stock = new Stock();
+        System.out.println("------请输入Stock信息-------");
+        System.out.println("请输入id:");
+        Stock.setId(input.next());
+        System.out.println("请输入数量:");
+        Stock.setAmount(input.nextInt());
+        System.out.println("请输入商品名称");
+        Stock.setName(input.next());
+        System.out.println("请输入进价：");
+        Stock.setCost(input.nextDouble());
+
+        return Stock;
+    }
+
+    public static void main(String[] args) {
+        stockTest stock = new stockTest();
+
+        Scanner input = new Scanner(System.in);
+        int i = 0;
+
+        try {
+            while(i!=5){
+                System.out.println("请输入操作:(1.展示；2.更新；3.删除;4.插入；5.退出)");
+                i = input.nextInt();
+                switch (i){
+                    case 1:stock.showStock();
+                        break;
+                    case 2:stock.updataStock(newStock(input));
+                        break;
+                    case 3:stock.remove(newStock(input));
+                        break;
+                    case 4:stock.create(newStock(input));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 }

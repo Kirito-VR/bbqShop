@@ -28,6 +28,11 @@ public class orderTest {
         order.remove(oid);
     }
 
+    public void create(Order o){
+        OrderDao order = new OrderDaoImpl();
+        order.create(o);
+    }
+
     public static Order newOrder(Scanner input){
         Order order = new Order();
         System.out.println("------请输入order信息-------");
@@ -46,12 +51,14 @@ public class orderTest {
 
     public static void main(String[] args) {
         orderTest order = new orderTest();
-        System.out.println("请输入操作:(1.展示；2.更新；3.删除;4.退出)");
+
         Scanner input = new Scanner(System.in);
-        int i = input.nextInt();
+        int i = 0;
 
         try {
             while(i!=5){
+                System.out.println("请输入操作:(1.展示；2.更新；3.删除;4.插入；5.退出)");
+                i = input.nextInt();
                 switch (i){
                     case 1:order.showOrder();
                         break;
@@ -59,7 +66,7 @@ public class orderTest {
                         break;
                     case 3:order.remove(newOrder(input));
                         break;
-                    case 4:i=5;
+                    case 4:order.create(newOrder(input));
                         break;
                     default:
                         break;

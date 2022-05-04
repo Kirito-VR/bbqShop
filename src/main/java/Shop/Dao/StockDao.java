@@ -1,5 +1,7 @@
 package Shop.Dao;
 
+import Shop.Bean.Stock;
+
 import java.sql.SQLException;
 
 /**
@@ -9,7 +11,7 @@ import java.sql.SQLException;
  */
 public interface StockDao {
     public void update(String good_id,int amount) throws SQLException;
-    public void create(String good_id,int amount);
+    public void create(Stock stock);
     public void Select(String good_id);
     public void Remove(String good_id);
 }
