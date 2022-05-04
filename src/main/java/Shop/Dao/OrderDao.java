@@ -3,7 +3,6 @@ package Shop.Dao;
 import Shop.Bean.Order;
 
 import java.sql.SQLException;
-import java.util.Map;
 
 /**
  * @Author: Cqmax
@@ -12,12 +11,12 @@ import java.util.Map;
  */
 public interface OrderDao {
     // 更新，修改订单
-    public void updata(Order order) throws SQLException;
+    public void Updata(Order order) throws SQLException;
     // 新建订单；
-    public void create(Order order);
+    public void Create(Order order);
     // 删除订单；
-    public void remove(Order order) throws SQLException;
+    public void Remove(Order order) throws SQLException;
     // 订单查询；
-    public void select(Order order) throws SQLException;
+    public void Select(Order order) throws SQLException;
 
 }

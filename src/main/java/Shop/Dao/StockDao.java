@@ -10,8 +10,12 @@ import java.sql.SQLException;
  * @Version 1.0
  */
 public interface StockDao {
-    public void update(String good_id,int amount) throws SQLException;
-    public void create(Stock stock);
+    // 更新库存
+    public void Update(String good_id,int amount) throws SQLException;
+    // 创建新库存
+    public void Create(Stock stock);
+    // 查询库存
     public void Select(String good_id);
+    // 删除库存；
     public void Remove(String good_id);
 }

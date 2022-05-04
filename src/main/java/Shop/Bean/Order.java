@@ -7,7 +7,12 @@ public class Order {
     private Double Aprice;
     private String Place;
     private String Info;
-    private String transaction_id;
+    private String transcation_id;
+
+    //无参构造函数
+//    public Order(){
+//
+//    }
 
     public String getOid() {
         return Oid;
@@ -26,7 +31,7 @@ public class Order {
     }
 
     public String getTransaction_id() {
-        return transaction_id;
+        return transcation_id;
     }
 
     public void setOid(String oid) {
@@ -46,7 +51,7 @@ public class Order {
     }
 
     public void setTransaction_id(String transaction_id) {
-        this.transaction_id = transaction_id;
+        this.transcation_id = transaction_id;
     }
 }
 

@@ -20,7 +20,7 @@ public class stockTest {
 
     public void updataStock(Stock o) throws SQLException {
         StockDao Stock = new StockDaoImpl();
-        Stock.update(null,0);
+        Stock.Update(null,0);
     }
 
     public void remove(Stock oid){
@@ -30,7 +30,7 @@ public class stockTest {
 
     public void create(Stock o){
         StockDao stock = new StockDaoImpl();
-        stock.create(o);
+        stock.Create(o);
     }
 
     public static Stock newStock(Scanner input){
