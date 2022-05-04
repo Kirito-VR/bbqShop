@@ -35,6 +35,7 @@ public class GoodDaoImpl implements GoodDao {
             pstmt.setString(1,good.getName());
             pstmt.setDouble(1,good.getPrice());
 
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,7 +44,18 @@ public class GoodDaoImpl implements GoodDao {
 
     @Override
     public void Remove(Good good) {
+        Connection conn = null;
+        try {
+            conn = ConnectionHandler.getConn();
+            String sql = "DELETE FROM good WHERE name=?;";
+            // id
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,good.getId());
+            pstmt.executeUpdate();//执行查询
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
