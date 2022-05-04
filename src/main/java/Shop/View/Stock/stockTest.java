@@ -2,7 +2,9 @@ package Shop.View.Stock;
 
 import Shop.Bean.Stock;
 import Shop.Dao.StockDao;
-import Shop.Dao.StockImpl.StockDaoImpl;
+import Shop.Dao.StockDaoImpl.StockDaoImpl;
+
+import java.sql.SQLException;
 
 /**
  * @Author: Cqmax
@@ -15,9 +17,9 @@ public class stockTest {
         Stock.Select("");//如果为空，则为查询所有的Stock
     }
 
-    public void updataStock(Stock o){
+    public void updataStock(Stock o) throws SQLException {
         StockDao Stock = new StockDaoImpl();
-        Stock.updata(null,null);
+        Stock.update(null,0);
     }
 
     public void remove(Stock oid){
