@@ -8,6 +8,7 @@ import Shop.util.ConnectionHandler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
     @Override
@@ -75,7 +76,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void Select(Order order) {
+    public List<Order> Select(Order order) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
 

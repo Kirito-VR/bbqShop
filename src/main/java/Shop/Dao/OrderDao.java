@@ -3,6 +3,7 @@ package Shop.Dao;
 import Shop.Bean.Order;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @Author: Cqmax
@@ -17,6 +18,6 @@ public interface OrderDao {
     // 删除订单；
     public void Remove(Order order) throws SQLException;
     // 订单查询；
-    public void Select(Order order) throws SQLException;
+    public List<Order> Select(Order order) throws SQLException;
 
 }

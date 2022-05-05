@@ -5,6 +5,8 @@ import Shop.Dao.OrderDao;
 import Shop.util.ConnectionHandler;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ludh
@@ -73,11 +75,11 @@ public class OrderDaoImpl implements OrderDao {
 
     //查询函数
     @Override
-    public void Select(Order order) throws SQLException {
+    public List<Order> Select(Order order) throws SQLException {
 
         Connection conn = ConnectionHandler.getConn();
         System.out.println("OrderDao:" + conn);
-
+        List<Order> list = new ArrayList<>();
         try {
             if (order == null) {
                 String sql = "select * from `Order` ";
@@ -86,34 +88,40 @@ public class OrderDaoImpl implements OrderDao {
 
                 pstmt = conn.prepareStatement(sql);
                 //pstmt.setString(1,order.getOid());
-
                 rs = pstmt.executeQuery();
+
                 while (rs.next()) {
-                    System.out.print(rs.getString("Oid") + " ");
-                    System.out.print(rs.getDouble("Aprice") + " ");
-                    System.out.print(rs.getString("Place") + " ");
-                    System.out.print(rs.getString("Info") + " ");
-                    System.out.println(rs.getString("transcation_id") + " ");
+                    Order temp = new Order();
+                    temp.setOid(rs.getString("Oid"));
+                    temp.setAprice(rs.getDouble("Aprice"));
+                    temp.setPlace(rs.getString("Place"));
+                    temp.setInfo(rs.getString("Info"));
+                    temp.setTransaction_id(rs.getString("transcation_id"));
+                    list.add(temp);
                 }
             }else {
-                String sql = "select * from `Order` where oid="+order.getOid();
+                String sql = "select * from `Order` where oid=？；";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 ResultSet rs = null;
                 pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1,order.getOid());
                 //pstmt.setString(1,order.getOid());
 
                 rs = pstmt.executeQuery();
                 while (rs.next()) {
-                    System.out.print(rs.getString("Oid") + " ");
-                    System.out.print(rs.getDouble("Aprice") + " ");
-                    System.out.print(rs.getString("Place") + " ");
-                    System.out.print(rs.getString("Info") + " ");
-                    System.out.println(rs.getString("transcation_id") + " ");
+                    Order temp = new Order();
+                    temp.setOid(rs.getString("Oid"));
+                    temp.setAprice(rs.getDouble("Aprice"));
+                    temp.setPlace(rs.getString("Place"));
+                    temp.setInfo(rs.getString("Info"));
+                    temp.setTransaction_id(rs.getString("transcation_id"));
+                    list.add(temp);
                 }
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
+        return list;
 
     }
 }
