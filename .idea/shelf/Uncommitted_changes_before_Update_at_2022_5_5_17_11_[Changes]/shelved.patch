@@ -1,0 +1,27 @@
+Index: src/main/java/Shop/Dao/StockDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/StockDao.java b/src/main/java/Shop/Dao/StockDao.java
+deleted file mode 100644
+--- a/src/main/java/Shop/Dao/StockDao.java	(revision 9c6d69876ff918f4a3bd748f7679865a01ba00db)
++++ /dev/null	(revision 9c6d69876ff918f4a3bd748f7679865a01ba00db)
+@@ -1,17 +0,0 @@
+-package Shop.Dao;
+-
+-import Shop.Bean.Stock;
+-
+-import java.sql.SQLException;
+-
+-/**
+- * @Author: Cqmax
+- * @Date: 2022/5/3 22:57
+- * @Version 1.0
+- */
+-public interface StockDao {
+-    public void update(String good_id,int amount) throws SQLException;
+-    public void create(Stock stock);
+-    public void Select(String good_id);
+-    public void Remove(String good_id);
+-}

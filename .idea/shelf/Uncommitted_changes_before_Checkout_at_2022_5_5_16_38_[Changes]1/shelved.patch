@@ -1,0 +1,722 @@
+Index: .idea/modules.xml
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+deleted file mode 100644
+--- a/.idea/modules.xml	
++++ /dev/null	
+@@ -1,8 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/bbqShop.iml" filepath="$PROJECT_DIR$/bbqShop.iml" />
+-    </modules>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/runConfigurations.xml
+===================================================================
+diff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml
+deleted file mode 100644
+--- a/.idea/runConfigurations.xml	
++++ /dev/null	
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: bbqShop.iml
+===================================================================
+diff --git a/bbqShop.iml b/bbqShop.iml
+deleted file mode 100644
+--- a/bbqShop.iml	
++++ /dev/null	
+@@ -1,11 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$">
+-      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+-    </content>
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java
+===================================================================
+diff --git a/src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java b/src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java
+deleted file mode 100644
+--- a/src/main/java/Shop/Dao/GoodDaoImpl/CreateDao/CreateDaoImpl.java	
++++ /dev/null	
+@@ -1,55 +0,0 @@
+-package Shop.Dao.GoodDaoImpl.CreateDao;
+-
+-import Shop.Bean.Good;
+-import Shop.Dao.GoodDao;
+-import Shop.Dao.LinkSql;
+-
+-import java.sql.Connection;
+-import java.sql.PreparedStatement;
+-import java.sql.SQLException;
+-import java.util.Map;
+-
+-/**
+- * @Author: Cqmax
+- * @Date: 2022/4/24 10:15
+- * @Version 1.0
+- */
+-public class CreateDaoImpl implements GoodDao {
+-    private Connection conn = null;
+-
+-    public CreateDaoImpl() throws SQLException {
+-        String jdbc_url = "jdbc:mysql://60.205.221.125:3306/Good?serverTimezone=UTC&useSSL=false";
+-        String user = "root";
+-        String pass = "ShuXue_7";
+-        this.conn = new LinkSql(jdbc_url,user,pass).getConn();
+-        System.out.println("111");
+-    }
+-
+-    public CreateDaoImpl(Connection conn) {
+-        this.conn = conn;
+-    }
+-
+-    public void CreateGood(Good good) throws SQLException {
+-        String sqlMassage = "insert into good values(?,?,?);";
+-
+-        // 读取good数据；
+-
+-        PreparedStatement ppsttmt = conn.prepareStatement(sqlMassage);
+-
+-        ppsttmt.setString(1,good.getId());
+-        ppsttmt.setString(2,good.getName());
+-        ppsttmt.setDouble(3,good.getPrice());
+-
+-
+-
+-    }
+-
+-    public void updata(Good good) {
+-
+-    }
+-
+-    public Map select(Map map) {
+-        return null;
+-    }
+-
+-}
+Index: src/main/java/Shop/Dao/StockDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/StockDao.java b/src/main/java/Shop/Dao/StockDao.java
+deleted file mode 100644
+--- a/src/main/java/Shop/Dao/StockDao.java	
++++ /dev/null	
+@@ -1,13 +0,0 @@
+-package Shop.Dao;
+-
+-import java.util.Map;
+-
+-/**
+- * @Author: Cqmax
+- * @Date: 2022/4/24 11:43
+- * @Version 1.0
+- */
+-public interface StockDao {
+-    public void updata(String good_id,String amount);
+-    public Map select(Map map);
+-}
+Index: target/classes/resource.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/target/classes/resource.xml b/target/classes/resource.xml
+new file mode 100644
+--- /dev/null	
++++ b/target/classes/resource.xml	
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="utf-8"?>
++<Infos>
++    <info-jdbc user="root" passwd="ShuXue_7"/>
++</Infos>
+\ No newline at end of file
+Index: src/main/java/Shop/util/ConnectionHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/util/ConnectionHandler.java b/src/main/java/Shop/util/ConnectionHandler.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Shop/util/ConnectionHandler.java	
+@@ -0,0 +1,38 @@
++package Shop.util;
++
++import java.sql.Connection;
++import java.sql.DriverManager;
++import java.sql.SQLException;
++
++/**
++ * @Author: Cqmax
++ * @Date: 2022/5/3 12:17
++ * @Version 1.0
++ */
++public class ConnectionHandler {
++    public static ThreadLocal<Connection> connection = new ThreadLocal<>();
++    public static Connection getConn() throws SQLException {
++        String url = "jdbc:mysql://60.205.221.125:3306/bbq?serverTimezone=UTC&useSSL=false";
++        String user = "root";
++        String password = "ShuXue_7";
++        Connection conn= null;
++        conn = connection.get();
++        if(conn==null){
++            conn = DriverManager.getConnection(url,user,password);
++            connection.set(conn);
++
++        }
++        return conn;
++    }
++    public static void connClose(){
++        Connection conn = connection.get();
++        if(conn != null){
++            try {
++                conn.close();
++            } catch (SQLException e) {
++                e.printStackTrace();
++            }
++        }
++    }
++
++}
+Index: src/main/java/Shop/Dao/GoodDaoImpl/GoodDaoImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/GoodDaoImpl/GoodDaoImpl.java b/src/main/java/Shop/Dao/GoodDaoImpl/GoodDaoImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Shop/Dao/GoodDaoImpl/GoodDaoImpl.java	
+@@ -0,0 +1,9 @@
++package Shop.Dao.GoodDaoImpl;
++
++/**
++ * @Author: Cqmax
++ * @Date: 2022/5/3 14:18
++ * @Version 1.0
++ */
++public class GoodDaoImpl {
++}
+Index: src/main/java/Shop/Bean/OrderInfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Bean/OrderInfo.java b/src/main/java/Shop/Bean/OrderInfo.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Shop/Bean/OrderInfo.java	
+@@ -0,0 +1,69 @@
++/*
++author: xm
++data:20220503
++描述：定义一个orderinfo，订单详情类
++* */
++package Shop.Bean;
++
++import java.util.Objects;
++
++public class OrderInfo {
++    private  String Id;
++    private  String orderIde;
++    private  String goodId;
++    private  int quantify;
++    public void setId(String id) {
++        Id = id;
++    }
++
++    public void setOrderIde(String orderIde) {
++        this.orderIde = orderIde;
++    }
++
++    public void setGoodId(String goodId) {
++        this.goodId = goodId;
++    }
++
++    public void setQuantify(int quantify) {
++        this.quantify = quantify;
++    }
++
++    public String getId() {
++        return Id;
++    }
++
++    public String getOrderIde() {
++        return orderIde;
++    }
++
++    public String getGoodId() {
++        return goodId;
++    }
++
++    public int getQuantify() {
++        return quantify;
++    }
++
++    @Override
++    public boolean equals(Object o) {
++        if (this == o) return true;
++        if (o == null || getClass() != o.getClass()) return false;
++        OrderInfo orderInfo = (OrderInfo) o;
++        return quantify == orderInfo.quantify && Objects.equals(Id, orderInfo.Id) && Objects.equals(orderIde, orderInfo.orderIde) && Objects.equals(goodId, orderInfo.goodId);
++    }
++
++    @Override
++    public int hashCode() {
++        return Objects.hash(Id, orderIde, goodId, quantify);
++    }
++
++    @Override
++    public String toString() {
++        return "OrderInfo{" +
++                "Id='" + Id + '\'' +
++                ", orderIde='" + orderIde + '\'' +
++                ", goodId='" + goodId + '\'' +
++                ", quantify=" + quantify +
++                '}';
++    }
++}
+Index: src/main/java/Shop/Dao/OrderDaoImpl/OrderDaoImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/OrderDaoImpl/OrderDaoImpl.java b/src/main/java/Shop/Dao/OrderDaoImpl/OrderDaoImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Shop/Dao/OrderDaoImpl/OrderDaoImpl.java	
+@@ -0,0 +1,70 @@
++package Shop.Dao.OrderDaoImpl;
++
++import Shop.Bean.Order;
++import Shop.Dao.OrderDao;
++import Shop.util.ConnectionHandler;
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.ResultSet;
++import java.sql.SQLException;
++
++/**
++ * @author ludh
++ * @date 2022/5/3 15:51:46
++ */
++public class OrderDaoImpl implements OrderDao {
++    @Override
++    public void updata(Order order) {
++
++    }
++
++    @Override
++    public void create(Order order) {
++
++    }
++    //删除函数
++    @Override
++    public void remove(Order order) throws SQLException {
++
++        Connection conn = ConnectionHandler.getConn();
++        System.out.println("OrderDao:"+conn);
++        try {
++            String sql="delete from Order where Oid=?";
++
++            PreparedStatement pstmt=conn.prepareStatement(sql);
++            Boolean bool;
++            bool = pstmt.execute(sql);  //执行SQL语句
++            System.out.println(bool);  //没有返回结果集所以打印false
++
++            //conn.commit();
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++            System.out.println("删除失败");
++        }
++
++    }
++
++    //查询函数
++    @Override
++    public void select(Order order) throws SQLException {
++
++        Connection conn = ConnectionHandler.getConn();
++        System.out.println("OrderDao:"+conn);
++        try {
++            String sql="select * from Order where Oid=?";
++
++            PreparedStatement pstmt=conn.prepareStatement(sql);
++            ResultSet rs =null;
++            rs = pstmt.executeQuery();
++            System.out.println(rs);  //输出查询
++
++            //conn.commit();
++
++        } catch (SQLException throwables) {
++            throwables.printStackTrace();
++
++        }
++
++    }
++}
+Index: src/main/java/Shop/Dao/StockImpl/StockDaoImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/StockImpl/StockDaoImpl.java b/src/main/java/Shop/Dao/StockImpl/StockDaoImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Shop/Dao/StockImpl/StockDaoImpl.java	
+@@ -0,0 +1,30 @@
++package Shop.Dao.StockImpl;
++
++import Shop.Dao.StockDao;
++
++/**
++ * @Author: Cqmax
++ * @Date: 2022/5/3 16:05
++ * @Version 1.0
++ */
++public class StockDaoImpl implements StockDao {
++    @Override
++    public void updata(String good_id, String amount) {
++
++    }
++
++    @Override
++    public void create(String good_id, String amount) {
++
++    }
++
++    @Override
++    public void Select(String good_id) {
++
++    }
++
++    @Override
++    public void Remove(String good_id) {
++
++    }
++}
+Index: src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java b/src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java	
+@@ -0,0 +1,57 @@
++package Shop.Dao.DAO.OrderDaoImpl;
++
++import Shop.Bean.Order;
++import Shop.Dao.OrderDao;
++import Shop.util.ConnetionHandler;
++import sun.net.ConnectionResetException;
++
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.SQLException;
++
++public class OrderDaoImpl implements OrderDao {
++    @Override
++    public void updata(Order order) {
++        remove(order);
++        create(order);
++    }
++    @Override
++    public void create(Order order) {
++        Connection conn =null;
++        PreparedStatement preparedStatement=null;
++        try {//获取连接
++            conn = ConnetionHandler.getConn();
++        } catch (SQLException e) {
++            throw new RuntimeException(e);
++        }
++        try {
++            preparedStatement=conn.prepareStatement("insert into `Order` values(?,?,?,?,?);");
++            preparedStatement.setString(1,order.getOid());
++            preparedStatement.setDouble(2,order.getAprice());
++            preparedStatement.setString(3,order.getPlace());
++            preparedStatement.setString(4,order.getInfo());
++            preparedStatement.setString(5,order.getTransaction_id());
++            preparedStatement.executeUpdate();
++        } catch (SQLException e) {
++            throw new RuntimeException(e);
++        }finally {
++            try {
++                conn.close();
++                preparedStatement.close();
++            } catch (SQLException e) {
++                throw new RuntimeException(e);
++            }
++        }
++
++    }
++
++    @Override
++    public void remove(Order order) {
++
++    }
++
++    @Override
++    public void select(Order order) {
++
++    }
++}
+Index: src/main/java/Shop/Bean/Order.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Shop.Bean;\r\n\r\nimport java.util.Objects;\r\n/*\r\n*@Author: wrl\r\n*/\r\npublic class Order {\r\n    private String Oid;\r\n    private Double Aprice;\r\n    private String Place;\r\n    private String Info;\r\n    private String transaction_id;\r\n\r\n\r\n    public String getOid() {\r\n        return Oid;\r\n    }\r\n\r\n    public void setOid(String Oid) {\r\n        this.Oid = Oid;\r\n    }\r\n\r\n    public Double getAprice() {\r\n        return Aprice;\r\n    }\r\n\r\n    public String getPlace() {\r\n        return Place;\r\n    }\r\n\r\n    public String getInfo() {\r\n        return Info;\r\n    }\r\n\r\n    public String getTransaction_id() {\r\n        return transaction_id;\r\n    }\r\n\r\n    public void setAprice(Double aprice) {\r\n        Aprice = aprice;\r\n    }\r\n\r\n    public void setPlace(String place) {\r\n        Place = place;\r\n    }\r\n\r\n    public void setInfo(String info) {\r\n        Info = info;\r\n    }\r\n\r\n    public void setTransaction_id(String transaction_id) {\r\n        this.transaction_id = transaction_id;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Order{\" +\r\n                \"Oid='\" + Oid + '\\'' +\r\n                \", Aprice=\" + Aprice +\r\n                \", Place='\" + Place + '\\'' +\r\n                \", Info='\" + Info + '\\'' +\r\n                \", transaction_id='\" + transaction_id + '\\'' +\r\n                '}';\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (o == null || getClass() != o.getClass()) return false;\r\n        Order order = (Order) o;\r\n        return Objects.equals(Oid, order.Oid) && Objects.equals(Aprice, order.Aprice) && Objects.equals(Place, order.Place) && Objects.equals(Info, order.Info) && Objects.equals(transaction_id, order.transaction_id);\r\n    }\r\n\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(Oid, Aprice, Place, Info, transaction_id);\r\n    }\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Bean/Order.java b/src/main/java/Shop/Bean/Order.java
+--- a/src/main/java/Shop/Bean/Order.java	
++++ b/src/main/java/Shop/Bean/Order.java	
+@@ -1,6 +1,4 @@
+ package Shop.Bean;
+-
+-import java.util.Objects;
+ /*
+ *@Author: wrl
+ */
+@@ -11,15 +9,10 @@
+     private String Info;
+     private String transaction_id;
+ 
+-
+     public String getOid() {
+         return Oid;
+     }
+ 
+-    public void setOid(String Oid) {
+-        this.Oid = Oid;
+-    }
+-
+     public Double getAprice() {
+         return Aprice;
+     }
+@@ -36,6 +29,10 @@
+         return transaction_id;
+     }
+ 
++    public void setOid(String oid) {
++        Oid = oid;
++    }
++
+     public void setAprice(Double aprice) {
+         Aprice = aprice;
+     }
+@@ -51,30 +48,6 @@
+     public void setTransaction_id(String transaction_id) {
+         this.transaction_id = transaction_id;
+     }
+-
+-    @Override
+-    public String toString() {
+-        return "Order{" +
+-                "Oid='" + Oid + '\'' +
+-                ", Aprice=" + Aprice +
+-                ", Place='" + Place + '\'' +
+-                ", Info='" + Info + '\'' +
+-                ", transaction_id='" + transaction_id + '\'' +
+-                '}';
+-    }
+-
+-    @Override
+-    public boolean equals(Object o) {
+-        if (this == o) return true;
+-        if (o == null || getClass() != o.getClass()) return false;
+-        Order order = (Order) o;
+-        return Objects.equals(Oid, order.Oid) && Objects.equals(Aprice, order.Aprice) && Objects.equals(Place, order.Place) && Objects.equals(Info, order.Info) && Objects.equals(transaction_id, order.transaction_id);
+-    }
+-
+-    @Override
+-    public int hashCode() {
+-        return Objects.hash(Oid, Aprice, Place, Info, transaction_id);
+-    }
+ }
+ 
+ 
+Index: src/main/java/Shop/View/Stock/stockTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/View/Stock/stockTest.java b/src/main/java/Shop/View/Stock/stockTest.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Shop/View/Stock/stockTest.java	
+@@ -0,0 +1,27 @@
++package Shop.View.Stock;
++
++import Shop.Bean.Stock;
++import Shop.Dao.StockDao;
++import Shop.Dao.StockImpl.StockDaoImpl;
++
++/**
++ * @Author: Cqmax
++ * @Date: 2022/5/3 16:04
++ * @Version 1.0
++ */
++public class stockTest {
++    public void  showStock(){
++        StockDao Stock = new StockDaoImpl();
++        Stock.Select("");//如果为空，则为查询所有的Stock
++    }
++
++    public void updataStock(Stock o){
++        StockDao Stock = new StockDaoImpl();
++        Stock.updata(null,null);
++    }
++
++    public void remove(Stock oid){
++        StockDao Stock = new StockDaoImpl();
++        Stock.Remove(null);
++    }
++}
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>guet.lanqiao.RedStart</groupId>\r\n    <artifactId>bbqShop</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n\r\n    <dependencies>\r\n        <dependency>\r\n            <groupId>mysql</groupId>\r\n            <artifactId>mysql-connector-java</artifactId>\r\n            <version>8.0.21</version>\r\n        </dependency>\r\n    </dependencies>\r\n\r\n\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	
++++ b/pom.xml	
+@@ -7,6 +7,18 @@
+     <groupId>guet.lanqiao.RedStart</groupId>
+     <artifactId>bbqShop</artifactId>
+     <version>1.0-SNAPSHOT</version>
++    <build>
++        <plugins>
++            <plugin>
++                <groupId>org.apache.maven.plugins</groupId>
++                <artifactId>maven-compiler-plugin</artifactId>
++                <configuration>
++                    <source>7</source>
++                    <target>7</target>
++                </configuration>
++            </plugin>
++        </plugins>
++    </build>
+ 
+     <dependencies>
+         <dependency>
+Index: src/main/java/Shop/Dao/OrderDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Shop.Dao;\r\n\r\nimport java.util.Map;\r\n\r\n/**\r\n * @Author: Cqmax\r\n * @Date: 2022/4/24 11:37\r\n * @Version 1.0\r\n */\r\npublic interface OrderDao {\r\n    // 更新，修改订单\r\n    public void updata(Order order);\r\n    // 新建订单；\r\n    public void create(Order order);\r\n    // 删除订单；\r\n    public void remove(Order order);\r\n    // 订单查询；\r\n    public Map select(Order order);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/OrderDao.java b/src/main/java/Shop/Dao/OrderDao.java
+--- a/src/main/java/Shop/Dao/OrderDao.java	
++++ b/src/main/java/Shop/Dao/OrderDao.java	
+@@ -1,5 +1,8 @@
+ package Shop.Dao;
+ 
++import Shop.Bean.Order;
++
++import java.sql.SQLException;
+ import java.util.Map;
+ 
+ /**
+@@ -13,7 +16,8 @@
+     // 新建订单；
+     public void create(Order order);
+     // 删除订单；
+-    public void remove(Order order);
++    public void remove(Order order) throws SQLException;
+     // 订单查询；
+-    public Map select(Order order);
++    public void select(Order order) throws SQLException;
++
+ }
+Index: src/main/java/Shop/View/Good/goodTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/View/Good/goodTest.java b/src/main/java/Shop/View/Good/goodTest.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/Shop/View/Good/goodTest.java	
+@@ -0,0 +1,23 @@
++package Shop.View.Good;
++
++import Shop.Dao.GoodDao;
++import Shop.Dao.GoodDaoImpl.GoodDaoImpl;
++
++/**
++ * @Author: Cqmax
++ * @Date: 2022/5/3 15:51
++ * @Version 1.0
++ */
++public class goodTest {
++    public void showGoodList(){
++//        GoodDao goodList = GoodDaoImpl.
++    }
++
++    public void updataGoodInfo(){
++
++    }
++
++    public static void main(String[] args) {
++
++    }
++}
+Index: src/main/java/Shop/Dao/GoodDao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Shop.Dao;\r\n\r\nimport Shop.Bean.Good;\r\n\r\nimport java.sql.SQLException;\r\nimport java.util.Map;\r\n\r\n/**\r\n * @Author: Cqmax\r\n * @Date: 2022/4/24 11:41\r\n * @Version 1.0\r\n */\r\npublic interface GoodDao {\r\n    public void CreateGood(Good good) throws SQLException;\r\n    public void updata(Good good);\r\n    public Map select(Map map);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/GoodDao.java b/src/main/java/Shop/Dao/GoodDao.java
+--- a/src/main/java/Shop/Dao/GoodDao.java	
++++ b/src/main/java/Shop/Dao/GoodDao.java	
+@@ -2,16 +2,15 @@
+ 
+ import Shop.Bean.Good;
+ 
+-import java.sql.SQLException;
+-import java.util.Map;
+-
+ /**
+  * @Author: Cqmax
+- * @Date: 2022/4/24 11:41
++ * @Date: 2022/5/3 12:45
+  * @Version 1.0
+  */
+ public interface GoodDao {
+-    public void CreateGood(Good good) throws SQLException;
+     public void updata(Good good);
+-    public Map select(Map map);
++    public void newGood(Good good);
++    public void deleteGood(Good good);
++    public void  selectGood(Good good);
++
+ }
