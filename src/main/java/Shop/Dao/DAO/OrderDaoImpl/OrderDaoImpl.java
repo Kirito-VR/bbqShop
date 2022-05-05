@@ -47,11 +47,61 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void Remove(Order order) {
+        Connection conn = null;
 
+        PreparedStatement preparedStatement = null;
+        try {//获取连接
+            conn = ConnectionHandler.getConn();
+        }catch(SQLException e){
+            throw new RuntimeException();
+        }
+
+        try{
+            preparedStatement = conn.prepareStatement("delect from 'Order' where Oid=?");
+            preparedStatement.setString(1, order.getOid());
+
+            preparedStatement.executeUpdate();
+
+        }catch(SQLException e){
+            throw new RuntimeException();
+        }finally{
+            try{
+                conn.close();
+                preparedStatement.close();
+            }catch(SQLException e) {
+                throw new RuntimeException();
+            }
+        }
     }
 
     @Override
     public void Select(Order order) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try{
+            conn = ConnectionHandler.getConn();
+
+        } catch(SQLException e){
+            throw new RuntimeException();
+        }
+
+        try{
+            preparedStatement = conn.prepareStatement("select * from 'Order' where Oid=?");
+            preparedStatement.setString(1,order.getOid());
+
+            preparedStatement.executeUpdate();
+
+        }catch(SQLException e){
+            throw new RuntimeException();
+        } finally{
+            try{
+                conn.close();
+                preparedStatement.close();
+            }catch(SQLException e){
+                throw new RuntimeException();
+            }
+        }
 
     }
 }
