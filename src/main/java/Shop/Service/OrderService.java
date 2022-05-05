@@ -13,5 +13,5 @@ public interface OrderService {
     public void Updata(Order order) throws SQLException;
     public void Select(Order order) throws SQLException;
     public void Remove(Order order) throws SQLException;
-    public void Create(Order order);
+    public void Create(Order order) throws SQLException;
 }

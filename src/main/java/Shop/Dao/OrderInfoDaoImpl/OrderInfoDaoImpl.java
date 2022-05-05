@@ -79,6 +79,38 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
     }
 
     @Override
+    public List<OrderInfo> Select(String oid) throws SQLException {
+
+        Connection conn = ConnectionHandler.getConn();
+        System.out.println("OrderInfoDao:" + conn);
+        List<OrderInfo> list =new ArrayList<>();
+
+        try {
+            String sql = "select * from `OrderInfo` where Oid=？";
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,oid);
+            //pstmt.setString(1,OrderInfo.getOid());
+
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.setId(rs.getString("ID"));
+                orderInfo.setOrderId(rs.getString("Oid"));
+                orderInfo.setGoodId(rs.getString("Gid"));
+                orderInfo.setQuantify(rs.getInt("Quantify"));
+                list.add(orderInfo);
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return list;
+
+    }
+    @Override
     public void Remove(OrderInfo orderInfo) {
 
     }
