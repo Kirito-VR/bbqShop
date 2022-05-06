@@ -44,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
         List<OrderInfo> info_list = orderInfo.Select(order.getOid());
         double sum_price = 0;
         for(int i=0;i<info_list.size();i++){
-            sum_price+= info_list.get(i).getQuantify();
+            sum_price+= info_list.get(i).getQuantify()*info_list.get(i).getPrice();
         }
         order.setAprice(sum_price);
         orderDao.Create(order);

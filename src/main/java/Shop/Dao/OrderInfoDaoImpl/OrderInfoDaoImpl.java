@@ -101,6 +101,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
                 orderInfo.setOrderId(rs.getString("Oid"));
                 orderInfo.setGoodId(rs.getString("Gid"));
                 orderInfo.setQuantify(rs.getInt("Quantify"));
+                orderInfo.setPrice(rs.getDouble("Price"));
                 list.add(orderInfo);
 
             }

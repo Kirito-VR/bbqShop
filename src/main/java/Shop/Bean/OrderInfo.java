@@ -12,6 +12,10 @@ public class OrderInfo {
     private  String orderIde;
     private  String goodId;
     private  int quantify;
+    private  double price;
+
+    public void setPrice(double price) {this.price = price;}
+
     public void setId(String id) {
         Id = id;
     }
@@ -44,6 +48,8 @@ public class OrderInfo {
         return quantify;
     }
 
+    public double getPrice() {return price;}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,6 +70,7 @@ public class OrderInfo {
                 ", orderIde='" + orderIde + '\'' +
                 ", goodId='" + goodId + '\'' +
                 ", quantify=" + quantify +
+                ", price=" + price +
                 '}';
     }
 }
