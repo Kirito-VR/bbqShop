@@ -50,7 +50,7 @@ public class GoodDaoImpl implements GoodDao {
         Connection conn = null;
         try {
             conn = ConnectionHandler.getConn();
-            String sql = "DELETE FROM good WHERE name=?;";
+            String sql = "DELETE FROM good WHERE id=?;";
             // id
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,good.getId());
@@ -69,7 +69,7 @@ public class GoodDaoImpl implements GoodDao {
 
             conn = ConnectionHandler.getConn();
             if(good != null){
-                String sql = "SELECT * FROM good WHERE id = ?";
+                String sql = "SELECT * FROM good WHERE name = ?";
                 PreparedStatement pstmt = conn.prepareStatement(sql);
                 pstmt.setString(1,good.getId());
                 ResultSet set = pstmt.executeQuery();

@@ -10,6 +10,16 @@ public class Good {
     private String name;
     private double price;
 
+    public Good(String id, String name, Double price) {
+        this.id=id;
+        this.name=name;
+        this.price=price;
+    }
+
+    public Good() {
+
+    }
+
 
     public String getId() {
         return id;
