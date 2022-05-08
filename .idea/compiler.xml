@@ -10,5 +10,6 @@
         <module name="bbqShop" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="7" />
   </component>
 </project>
