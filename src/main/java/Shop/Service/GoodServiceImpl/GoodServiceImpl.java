@@ -5,6 +5,8 @@ import Shop.Dao.GoodDao;
 import Shop.Dao.GoodDaoImpl.GoodDaoImpl;
 import Shop.Service.GoodService;
 
+import java.util.List;
+
 /**
  * @Author: Cqmax
  * @Date: 2022/5/5 17:01
@@ -18,9 +20,9 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
-    public void Select(Good good) {
+    public List<Good> Select(Good good) {
         GoodDao gooddao =new GoodDaoImpl();
-        gooddao.Select(good);
+        return gooddao.Select(good);
     }
 
     @Override

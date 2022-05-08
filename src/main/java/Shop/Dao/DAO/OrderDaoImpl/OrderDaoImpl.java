@@ -8,6 +8,7 @@ import Shop.util.ConnectionHandler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
@@ -79,7 +80,7 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> Select(Order order) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
-
+        List<Order> list = new ArrayList<>();
         try{
             conn = ConnectionHandler.getConn();
 
@@ -103,6 +104,6 @@ public class OrderDaoImpl implements OrderDao {
                 throw new RuntimeException();
             }
         }
-
+        return list;
     }
 }

@@ -1,9 +1,11 @@
 package Shop.View.Good;
 
 import Shop.Bean.Good;
+import Shop.Service.GoodServiceImpl.GoodServiceImpl;
 import Shop.util.ConnectionHandler;
 
 import java.awt.*;
+import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -90,39 +92,12 @@ public class GoodMain extends JFrame {
 
     public Object[][] getDataFromDatabase() {
 
-        java.util.List<Good> list = new ArrayList<Good>();
-        Connection conn = null;
+        List<Good> list = new GoodServiceImpl().Select(null);
+
        /* String user = "root";
         String dbPassword = "ShuXue_7";
         String url = "jdbc:mysql://60.205.221.125:3306/bbq?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";*/
-        Statement stmt = null;
-        String sql = "SELECT * FROM good";
-        ResultSet rs = null;
-        try {
-            conn = ConnectionHandler.getConn();
-            //conn = DriverManager.getConnection(url, user, dbPassword);
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Good good = new Good();
-                good.setId(rs.getString(1));
-                good.setName(rs.getString(2));
-                good.setPrice(rs.getFloat(3));
 
-                list.add(good);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                stmt.close();
-                conn.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-
-        }
         // 把集合的数据（商品信息）转换成二维数组
         data = new Object[list.size()][head.length];
 
