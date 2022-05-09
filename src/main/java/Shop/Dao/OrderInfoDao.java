@@ -11,9 +11,9 @@ import java.util.List;
  * @Version 1.0
  */
 public interface OrderInfoDao {
-    public void Create(OrderInfo orderInfo);
-    public void Update(OrderInfo orderInfo);
+    public void Create(OrderInfo orderInfo) throws SQLException;
+    public void Update(OrderInfo orderInfo) throws SQLException;
     public List<OrderInfo> Select(OrderInfo orderInfo) throws SQLException;
     public List<OrderInfo> Select(String oid) throws SQLException;
-    public void Remove(OrderInfo orderInfo);
+    public void Remove(OrderInfo orderInfo) throws SQLException;
 }

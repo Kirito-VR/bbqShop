@@ -3,6 +3,7 @@ package Shop.Dao.OrderInfoDaoImpl;
 import Shop.Bean.OrderInfo;
 import Shop.Dao.OrderInfoDao;
 import Shop.util.ConnectionHandler;
+import com.mysql.cj.PreparedQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,13 +19,33 @@ import java.util.List;
  */
 public class OrderInfoDaoImpl implements OrderInfoDao {
     @Override
-    public void Create(OrderInfo orderInfo) {
-        
+    public void Create(OrderInfo orderInfo) throws SQLException {
+        Connection conn = ConnectionHandler.getConn();
+        String sql = "INSERT INTO OrderInfo Values(?,?,?,?,?);";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,orderInfo.getId());
+            pstmt.setString(2,orderInfo.getOrderId());
+            pstmt.setString(3,orderInfo.getGoodId());
+            pstmt.setInt(4,orderInfo.getQuantify());
+            pstmt.setDouble(5,orderInfo.getPrice());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("数据添加失败！！");
+        }
     }
 
     @Override
-    public void Update(OrderInfo orderInfo) {
-
+    public void Update(OrderInfo orderInfo) throws SQLException {
+        Remove(orderInfo);
+        try {
+            Create(orderInfo);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("修改失败！！");
+        }
     }
 
     @Override
@@ -112,7 +133,17 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
     }
     @Override
-    public void Remove(OrderInfo orderInfo) {
+    public void Remove(OrderInfo orderInfo) throws SQLException {
+        Connection conn = ConnectionHandler.getConn();
+        String sql = "DELETE FROM OrderInfo where id=?;";
 
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,orderInfo.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("删除失败！！");
+        }
     }
 }
