@@ -62,7 +62,7 @@ public class StockDaoImpl implements StockDao{
         Connection conn=null;
         try {
             conn=ConnectionHandler.getConn();
-            String sql="SELECT *FROM Stock WHERE good_id=?";
+            String sql="SELECT * FROM Stock WHERE good_id=?";
             PreparedStatement pstmt=conn.prepareStatement(sql);
             pstmt.setString(1,good_id);
             pstmt.executeUpdate();
