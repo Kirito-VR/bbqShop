@@ -1,8 +1,5 @@
-/*
- * Created by JFormDesigner on Sat May 07 19:06:01 CST 2022
- */
 
-package Shop.View.Good;
+package Shop.View.Order;
 
 import Shop.util.ConnectionHandler;
 
@@ -15,7 +12,7 @@ import javax.swing.*;
 
 
 /**
- * @author 1
+ * @author wrl
  */
 public class Login extends JFrame {
     public Login() {
@@ -69,9 +66,9 @@ public class Login extends JFrame {
                         stmt = conn.createStatement();
                         rs = stmt.executeQuery(sql);
                         if (rs.next()) {//让游标向下移动一次
-                            System.out.println("登录成1功");
+                            System.out.println("登录成功");
                             this.setVisible(false);
-                            GoodMain goodMain =new GoodMain();
+                            OrderMain goodMain =new OrderMain();
                             goodMain.setVisible(true);
                         } else {
                             System.out.println("用户名或密码错误");
