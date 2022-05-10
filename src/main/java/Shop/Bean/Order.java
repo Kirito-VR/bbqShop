@@ -10,9 +10,15 @@ public class Order {
     private String transcation_id;
 
     //无参构造函数
-//    public Order(){
-//
-//    }
+   public Order(){
+}
+
+    public Order(String Oid, String Place, Double Aprice, String Info) {
+       this.Oid = Oid;
+       this.Place = Place;
+       this.Aprice = Aprice;
+       this.Info = Info;
+    }
 
     public String getOid() {
         return Oid;

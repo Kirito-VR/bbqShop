@@ -1,0 +1,59 @@
+<changelist name="Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1" date="1651983199293" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2022/5/8 12:11 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/OrderDaoImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Dao/GoodDaoImpl/GoodDaoImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Dao/GoodDaoImpl/GoodDaoImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/GoodDaoImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Dao/OrderInfoDao.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Dao/OrderInfoDao.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/OrderInfoDao.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Bean/OrderInfo.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Bean/OrderInfo.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/OrderInfo.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Dao/OrderDao.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Dao/OrderDao.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/OrderDao.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Dao/StockDaoImpl/StockDaoImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Dao/StockDaoImpl/StockDaoImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/StockDaoImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Dao/OrderInfoDaoImpl/OrderInfoDaoImpl.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Dao/OrderInfoDaoImpl/OrderInfoDaoImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/OrderInfoDaoImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/View/Order/orderTest.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/View/Order/orderTest.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/orderTest.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Dao/LinkSql.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Dao/LinkSql.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/LinkSql.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/Dao/StockDao.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/Dao/StockDao.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/StockDao.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/Shop/View/Stock/stockTest.class" />
+    <option name="AFTER_PATH" value="target/classes/Shop/View/Stock/stockTest.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2022_5_8_12_11_[Changes]1/stockTest.class" />
+  </binary>
+</changelist>

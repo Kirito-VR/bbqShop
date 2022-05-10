@@ -1,0 +1,56 @@
+Index: src/main/java/Shop/Dao/StockDaoImpl/StockDaoImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Shop.Dao.StockDaoImpl;\r\n\r\nimport Shop.Bean.Stock;\r\nimport Shop.Dao.StockDao;\r\nimport Shop.util.ConnectionHandler;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.SQLException;\r\n\r\npublic class StockDaoImpl implements StockDao{\r\n\r\n    @Override\r\n    public void Update(String good_id, int amount) throws SQLException {\r\n        Connection conn=null;\r\n        conn= ConnectionHandler.getConn();\r\n        System.out.println(\"StockDao:\" + conn);\r\n        try {\r\n            String sql=\"UPDATE Stock SET amount=amount-? WHERE good_id=?\";\r\n            PreparedStatement pstmt=conn.prepareStatement(sql);\r\n\r\n            pstmt.setString(1,good_id);\r\n            pstmt.setInt(2,amount);\r\n\r\n            pstmt.executeUpdate();\r\n\r\n\r\n\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n            throw new SQLException(\"库存更新失败\");\r\n        }finally {\r\n            ConnectionHandler.connClose();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void Create(Stock stock) throws SQLException {\r\n        Connection conn=null;\r\n        try {\r\n            conn= ConnectionHandler.getConn();\r\n            String sql=\"INSERT INTO Stock VALUES(?,?,?,?)\";\r\n            PreparedStatement pstmt=conn.prepareStatement(sql);\r\n\r\n            pstmt.setString(1, stock.getId());\r\n            pstmt.setString(2, stock.getName());\r\n            pstmt.setInt(3,stock.getAmount());\r\n            pstmt.setDouble(4,stock.getCost());\r\n            pstmt.executeUpdate();\r\n\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n            throw new SQLException(\"新增库存失败\");\r\n        }finally {\r\n            ConnectionHandler.connClose();\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public void Select(String good_id) throws SQLException {\r\n        Connection conn=null;\r\n        try {\r\n            conn=ConnectionHandler.getConn();\r\n            String sql=\"SELECT *FROM Stock WHERE good_id=?\";\r\n            PreparedStatement pstmt=conn.prepareStatement(sql);\r\n            pstmt.setString(1,good_id);\r\n            pstmt.executeUpdate();\r\n\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n            throw new SQLException(\"库存中未找到该商品\");\r\n        }finally {\r\n            ConnectionHandler.connClose();\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public void Remove(String good_id) throws SQLException {\r\n        Connection conn=null;\r\n        try {\r\n            conn=ConnectionHandler.getConn();\r\n            String sql=\"DELETE *FROM Stock WHERE good_id=?\";\r\n            PreparedStatement pstmt=conn.prepareStatement(sql);\r\n            pstmt.setString(1,good_id);\r\n            pstmt.executeUpdate();\r\n\r\n        } catch (SQLException throwables) {\r\n            throwables.printStackTrace();\r\n            throw new SQLException(\"该商品删除失败\");\r\n        }finally {\r\n            ConnectionHandler.connClose();\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/StockDaoImpl/StockDaoImpl.java b/src/main/java/Shop/Dao/StockDaoImpl/StockDaoImpl.java
+--- a/src/main/java/Shop/Dao/StockDaoImpl/StockDaoImpl.java	
++++ b/src/main/java/Shop/Dao/StockDaoImpl/StockDaoImpl.java	
+@@ -62,7 +62,7 @@
+         Connection conn=null;
+         try {
+             conn=ConnectionHandler.getConn();
+-            String sql="SELECT *FROM Stock WHERE good_id=?";
++            String sql="SELECT * FROM Stock WHERE good_id=?";
+             PreparedStatement pstmt=conn.prepareStatement(sql);
+             pstmt.setString(1,good_id);
+             pstmt.executeUpdate();
+Index: src/main/java/Shop/Dao/LinkSql.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Shop.Dao;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.DriverManager;\r\nimport java.sql.SQLException;\r\n\r\n/**\r\n * @Author: Cqmax\r\n * @Date: 2022/4/8 15:12\r\n * @Version 1.0\r\n */\r\npublic class LinkSql {\r\n\r\n    private Connection conn =null;\r\n\r\n    public LinkSql(String url,String user,String pass) throws  SQLException{\r\n        this.conn = DriverManager.getConnection(url,user,pass);\r\n        System.out.println(this.conn);\r\n    }\r\n\r\n    public Connection getConn() {\r\n            return this.conn;\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        String url = \"jdbc:mysql://localhost:3306/teashop?serverTimezone=UTC&useSSL=false\";\r\n        String user = \"root\";\r\n        String pass = \"ShuXue_7\";\r\n        Connection conn = null;\r\n        try {\r\n            conn = DriverManager.getConnection(url,user,pass);\r\n            System.out.println(conn);\r\n        } catch (SQLException e) {\r\n            e.printStackTrace();\r\n        }\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/LinkSql.java b/src/main/java/Shop/Dao/LinkSql.java
+--- a/src/main/java/Shop/Dao/LinkSql.java	
++++ b/src/main/java/Shop/Dao/LinkSql.java	
+@@ -23,7 +23,7 @@
+     }
+ 
+     public static void main(String[] args) {
+-        String url = "jdbc:mysql://localhost:3306/teashop?serverTimezone=UTC&useSSL=false";
++        String url = "jdbc:mysql://60.205.221.125:3306/bbq?serverTimezone=UTC&useSSL=false";
+         String user = "root";
+         String pass = "ShuXue_7";
+         Connection conn = null;
+Index: src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\npackage Shop.Dao.DAO.OrderDaoImpl;\r\n\r\nimport Shop.Bean.Order;\r\nimport Shop.Dao.OrderDao;\r\nimport Shop.util.ConnectionHandler;\r\n\r\nimport java.sql.Connection;\r\nimport java.sql.PreparedStatement;\r\nimport java.sql.SQLException;\r\nimport java.util.List;\r\n\r\npublic class OrderDaoImpl implements OrderDao {\r\n    @Override\r\n    public void Updata(Order order) {\r\n        Remove(order);\r\n        Create(order);\r\n    }\r\n    @Override\r\n    public void Create(Order order) {\r\n        Connection conn =null;\r\n        PreparedStatement preparedStatement=null;\r\n        try {//获取连接\r\n            conn = ConnectionHandler.getConn();\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        try {\r\n            preparedStatement=conn.prepareStatement(\"insert into `Order` values(?,?,?,?,?);\");\r\n            preparedStatement.setString(1,order.getOid());\r\n            preparedStatement.setDouble(2,order.getAprice());\r\n            preparedStatement.setString(3,order.getPlace());\r\n            preparedStatement.setString(4,order.getInfo());\r\n            preparedStatement.setString(5,order.getTransaction_id());\r\n            preparedStatement.executeUpdate();\r\n        } catch (SQLException e) {\r\n            throw new RuntimeException(e);\r\n        }finally {\r\n            try {\r\n                conn.close();\r\n                preparedStatement.close();\r\n            } catch (SQLException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public void Remove(Order order) {\r\n        Connection conn = null;\r\n\r\n        PreparedStatement preparedStatement = null;\r\n        try {//获取连接\r\n            conn = ConnectionHandler.getConn();\r\n        }catch(SQLException e){\r\n            throw new RuntimeException();\r\n        }\r\n\r\n        try{\r\n            preparedStatement = conn.prepareStatement(\"delect from 'Order' where Oid=?\");\r\n            preparedStatement.setString(1, order.getOid());\r\n\r\n            preparedStatement.executeUpdate();\r\n\r\n        }catch(SQLException e){\r\n            throw new RuntimeException();\r\n        }finally{\r\n            try{\r\n                conn.close();\r\n                preparedStatement.close();\r\n            }catch(SQLException e) {\r\n                throw new RuntimeException();\r\n            }\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public List<Order> Select(Order order) {\r\n        Connection conn = null;\r\n        PreparedStatement preparedStatement = null;\r\n\r\n        try{\r\n            conn = ConnectionHandler.getConn();\r\n\r\n        } catch(SQLException e){\r\n            throw new RuntimeException();\r\n        }\r\n\r\n        try{\r\n            preparedStatement = conn.prepareStatement(\"select * from 'Order' where Oid=?\");\r\n            preparedStatement.setString(1,order.getOid());\r\n\r\n            preparedStatement.executeUpdate();\r\n\r\n        }catch(SQLException e){\r\n            throw new RuntimeException();\r\n        } finally{\r\n            try{\r\n                conn.close();\r\n                preparedStatement.close();\r\n            }catch(SQLException e){\r\n                throw new RuntimeException();\r\n            }\r\n        }\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java b/src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java
+--- a/src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java	
++++ b/src/main/java/Shop/Dao/DAO/OrderDaoImpl/OrderDaoImpl.java	
+@@ -104,5 +104,6 @@
+             }
+         }
+ 
++        return null;
+     }
+ }
+\ No newline at end of file
