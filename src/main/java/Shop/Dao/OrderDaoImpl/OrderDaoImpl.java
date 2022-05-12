@@ -38,14 +38,15 @@ public class OrderDaoImpl implements OrderDao {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            try {
-                conn.close();
-                preparedStatement.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
+//        finally {
+//            try {
+//                conn.close();
+//                preparedStatement.close();
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
 
     }
 

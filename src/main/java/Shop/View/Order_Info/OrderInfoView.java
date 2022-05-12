@@ -1,4 +1,4 @@
-package Shop.View.Order;
+package Shop.View.Order_Info;
 
 /**
  * @author ludh
@@ -6,21 +6,28 @@ package Shop.View.Order;
  */
 
 import Shop.Bean.Good;
-import Shop.Service.GoodServiceImpl.GoodServiceImpl;
+import Shop.Bean.OrderInfo;
+import Shop.Service.OrderInfoServiceImpl.OrderInfoServiceImpl;
 import Shop.View.Good.GoodMain;
-import Shop.util.ConnectionHandler;
+import Shop.View.Order.OrderChange;
 
 import java.awt.*;
-import java.util.List;
-import java.sql.*;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class OrderInfoView extends JFrame {
+    private String oid = null;
     public OrderInfoView() {
         initComponents();
     }
+
+    public OrderInfoView(String oid){
+        this.oid = oid;
+        initComponents();
+    }
+
 
     private void initComponents() {
         scrollPane1 = new JScrollPane();
@@ -72,7 +79,12 @@ public class OrderInfoView extends JFrame {
                     String name=(String)table1.getValueAt(rowNo, 1);
                     Double price=(Double)table1.getValueAt(rowNo, 2);
 
-                    Good good=new Good(id,name,price);
+                    try {
+                        List<OrderInfo> list  = new OrderInfoServiceImpl().Select(id);
+//                        new OrderChange();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
 
                 }
         );
@@ -125,24 +137,31 @@ public class OrderInfoView extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-//    public Object[][] getDataFromDatabase() {
-//
-//        List<Good> list = new GoodServiceImpl().Select(null);
-//
-//
-//        // 把集合的数据（商品信息）转换成二维数组
-//        data = new Object[list.size()][head.length];
-//
-//        for (int i = 0; i < list.size(); i++) {
-//            for (int j = 0; j < head.length; j++) {
-//                data[i][0] = list.get(i).getId();
-//                data[i][1] = list.get(i).getName();
-//                data[i][2] = list.get(i).getPrice();
-//
-//            }
-//        }
-//        return data;
-//    }
+    public Object[][] getDataFromDatabase() {
+
+        List<OrderInfo> list = null;
+        try {
+            list = new OrderInfoServiceImpl().Select(oid);
+            // 把集合的数据（商品信息）转换成二维数组
+            data = new Object[list.size()][head.length];
+
+            for (int i = 0; i < list.size(); i++) {
+                for (int j = 0; j < head.length; j++) {
+                    data[i][0] = list.get(i).getId();
+                    data[i][1] = list.get(i).getGoodname();
+                    data[i][2] = list.get(i).getPrice();
+                    data[i][3] = list.get(i).getQuantify();
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        return data;
+    }
 
     private JScrollPane scrollPane1;
     private JTable table1;

@@ -11,6 +11,7 @@ public class OrderInfo {
     private  String Id;
     private  String orderIde;
     private  String goodId;
+    private String goodname;
     private  int quantify;
     private  double price;
 
@@ -50,17 +51,30 @@ public class OrderInfo {
 
     public double getPrice() {return price;}
 
+    public String getGoodname() {
+        return goodname;
+    }
+
+    public void setGoodname(String goodname) {
+        this.goodname = goodname;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderInfo orderInfo = (OrderInfo) o;
-        return quantify == orderInfo.quantify && Objects.equals(Id, orderInfo.Id) && Objects.equals(orderIde, orderInfo.orderIde) && Objects.equals(goodId, orderInfo.goodId);
+        return quantify == orderInfo.quantify &&
+                Double.compare(orderInfo.price, price) == 0 &&
+                Objects.equals(Id, orderInfo.Id) &&
+                Objects.equals(orderIde, orderInfo.orderIde) &&
+                Objects.equals(goodId, orderInfo.goodId) &&
+                Objects.equals(goodname, orderInfo.goodname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, orderIde, goodId, quantify);
+        return Objects.hash(Id, orderIde, goodId, goodname, quantify, price);
     }
 
     @Override
@@ -69,6 +83,7 @@ public class OrderInfo {
                 "Id='" + Id + '\'' +
                 ", orderIde='" + orderIde + '\'' +
                 ", goodId='" + goodId + '\'' +
+                ", goodname='" + goodname + '\'' +
                 ", quantify=" + quantify +
                 ", price=" + price +
                 '}';

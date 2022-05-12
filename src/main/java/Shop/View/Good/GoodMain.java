@@ -1,7 +1,9 @@
 package Shop.View.Good;
 
 import Shop.Bean.Good;
+import Shop.Bean.OrderInfo;
 import Shop.Service.GoodServiceImpl.GoodServiceImpl;
+import Shop.View.Order.OrderChange;
 import Shop.util.ConnectionHandler;
 
 import java.awt.*;
@@ -16,9 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @liwei
  */
 public class GoodMain extends JFrame {
+    private String Oid;
     public GoodMain() {
         initComponents();
     }
+    public GoodMain(String Oid)  { this.Oid = Oid; initComponents();}
 
     private void initComponents() {
         scrollPane1 = new JScrollPane();
@@ -61,6 +65,7 @@ public class GoodMain extends JFrame {
                     System.out.println(price);
 
                     Good good=new Good(id,name,price);
+                    new OrderChange(new OrderInfo()).setVisible(true);
                     /*UpdateGood updateGood=new UpdateGood(good);
                     updateGood.setVisible(true);*/
                 }

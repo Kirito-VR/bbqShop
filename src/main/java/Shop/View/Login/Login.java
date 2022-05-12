@@ -2,8 +2,10 @@
  * Created by JFormDesigner on Sat May 07 19:06:01 CST 2022
  */
 
-package Shop.View.Good;
+package Shop.View.Login;
 
+import Shop.View.Good.GoodMain;
+import Shop.View.Order.OrderMain;
 import Shop.util.ConnectionHandler;
 
 import java.awt.*;
@@ -58,21 +60,20 @@ public class Login extends JFrame {
 
                     Connection conn = null;
 
-                    String sql = "SELECT * FROM sys_user WHERE username='" + username + "' AND password='" + password + "'";
-                    System.out.println(sql);
-                    ResultSet rs = null;//结果集：内存，存储了查询到的数据；内存区有一个游标，执行完查询的时候，不指向任何记录
-                    Statement stmt = null;//语句对象，容易产生注入攻击
+                    String sql = "SELECT * FROM sys_user WHERE username= ? AND password=?;";
 
                     try {
                         conn = ConnectionHandler.getConn();
 
-                        stmt = conn.createStatement();
-                        rs = stmt.executeQuery(sql);
+                        PreparedStatement pstmt = conn.prepareStatement(sql);
+                        pstmt.setString(1,username);
+                        pstmt.setString(2,password);
+                        ResultSet rs = pstmt.executeQuery();
                         if (rs.next()) {//让游标向下移动一次
                             System.out.println("登录成1功");
                             this.setVisible(false);
-                            GoodMain goodMain =new GoodMain();
-                            goodMain.setVisible(true);
+                            OrderMain orderMain =new OrderMain();
+                            orderMain.setVisible(true);
                         } else {
                             System.out.println("用户名或密码错误");
                         }

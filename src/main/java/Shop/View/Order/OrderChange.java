@@ -1,3 +1,4 @@
+
 package Shop.View.Order;
 
 import Shop.Bean.OrderInfo;
@@ -40,6 +41,9 @@ public class OrderChange extends JFrame {
         button1 = new JButton();
         label6 = new JLabel();
         textField5 = new JTextField();
+        textField6=new JTextField();
+        label7=new JLabel();
+
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
@@ -55,7 +59,7 @@ public class OrderChange extends JFrame {
         label2.setBounds(new Rectangle(new Point(30, 70), label2.getPreferredSize()));
         contentPane.add(textField1);
         textField1.setBounds(95, 70, 65, textField1.getPreferredSize().height);
-        textField1.setText(orderInfo.getOrderId());//设置商品名称
+        textField1.setText(orderInfo.getOrderId()+"");//设置商品名称
 
         //---- label3 ----
         label3.setText("\u5546\u54c1\u7f16\u53f7\uff1a");
@@ -63,7 +67,7 @@ public class OrderChange extends JFrame {
         label3.setBounds(new Rectangle(new Point(215, 70), label3.getPreferredSize()));
         contentPane.add(textField2);
         textField2.setBounds(275, 70, 65, textField2.getPreferredSize().height);//商品编号
-        textField2.setText(orderInfo.getGoodId());
+        textField2.setText(orderInfo.getGoodId()+"");
 
         //---- label4 ----
         label4.setText("\u5546\u54c1\u4ef7\u683c\uff1a");
@@ -88,14 +92,26 @@ public class OrderChange extends JFrame {
         contentPane.add(textField5);
         textField5.setBounds(95, 195, 65, textField5.getPreferredSize().height);
         textField5.setText(orderInfo.getQuantify()+"");
+        contentPane.add(textField6);
+        textField6.setBounds(280, 195, 65, textField5.getPreferredSize().height);
+        textField5.setText(orderInfo.getId()+"");
+
+        label7.setText("ID:");
+        contentPane.add(label7);
+        label7.setBounds(new Rectangle(new Point(220, 195), label5.getPreferredSize()));
+
+
         setVisible(true);
         setDefaultCloseOperation(3);
-//        this.getContentPane().setBackground();
         button1.setBounds(new Rectangle(new Point(290, 235), button1.getPreferredSize()));
         button1.addActionListener( (e)->{
         // 修改订单
             orderInfo.setQuantify(Integer.parseInt(textField3.getText().replace(" ","")));
-//            backcalss();//返回类，外部调用即可
+            orderInfo.setOrderId(textField1.getText());
+            orderInfo.setPrice(Integer.parseInt(textField4.getText().replace(" ","")));
+            orderInfo.setGoodId(textField2.getText());
+            orderInfo.setId(textField6.getText());
+            backcalss();
             textField5.setText("修改成功！");
         });
         //---- label6 ----
@@ -132,6 +148,7 @@ public class OrderChange extends JFrame {
     private JLabel label6;
     private JLabel label7;
     private JTextField textField5;//
+    private JTextField textField6;//
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
 }

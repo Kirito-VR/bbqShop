@@ -1,11 +1,15 @@
 package Shop.View.Order;
 
 import Shop.Bean.Order;
+import Shop.Service.OrderService;
 import Shop.Service.OrderServiceImpl.OrderServiceImpl;
+import Shop.View.Good.GoodMain;
+import Shop.View.Order_Info.OrderInfoView;
 import Shop.util.ConnectionHandler;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 
 import java.awt.*;
+import java.util.Date;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
@@ -54,17 +58,23 @@ public class OrderMain extends JFrame {
         button1.setBounds(335, 355, 100, 30);
         button1.addActionListener(
                 (e)->{
-                    int rowNo = table1.getSelectedRow();//选取所选的行号
-                    String Oid = (String)table1.getValueAt(rowNo,0);//订单编号
-                    String Place = (String)table1.getValueAt(rowNo,2);//桌号
-                    Double Aprice = (Double)table1.getValueAt(rowNo,3);//总金额
-                    String Info = (String)table1.getValueAt(rowNo,4);//备注
 
+                    String Oid =String.valueOf(System.currentTimeMillis()).substring(0,10);
+                    String Place = "三号桌";
                     System.out.println(Oid);
                     System.out.println(Place);
-                    System.out.println(Aprice);
+                    String Info = "未完成";
 
-                    Order order = new Order(Oid,Place,Aprice,Info);
+
+                    Order order = new Order(Oid,Place,1.0,Info);
+                    OrderService orderService =new OrderServiceImpl();
+                    try {
+                        orderService.Create(order);
+                        new GoodMain(Oid).setVisible(true);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        System.out.println("添加失败");
+                    }
                     /*UpdateOrder updateGood=new UpdateOrder(Order);
                     updateOrder.setVisible(true);*/
                 }
@@ -78,13 +88,17 @@ public class OrderMain extends JFrame {
                     String Oid=(String) table1.getValueAt(rowNo, 0);
                     String Place = (String)table1.getValueAt(rowNo,1);
                     Double Aprice=(Double)table1.getValueAt(rowNo, 2);
-                    String Info = (String)table1.getValueAt(rowNo,4);
+                    String Info = (String)table1.getValueAt(rowNo,3);
 
                     System.out.println(Oid);
                     System.out.println(Place);
                     System.out.println(Aprice);
                     System.out.println(Info);
 
+
+
+
+                    OrderInfoView orderInfo = new OrderInfoView();
                     /*UpdateOrder updateOrder = new UpdateOrder(Order);
                     updateOrder.setVisible(true);*/
                 }
@@ -151,16 +165,17 @@ public class OrderMain extends JFrame {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        } finally {
-            try {
-                rs.close();
-                pstmt.close();
-                conn.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-
         }
+//        finally {
+//            try {
+//                rs.close();
+//                pstmt.close();
+//                conn.close();
+//            } catch (SQLException throwables) {
+//                throwables.printStackTrace();
+//            }
+//
+//        }
         // 把集合的数据（订单信息）转换成二维数组
         data = new Object[list.size()][head.length];
 

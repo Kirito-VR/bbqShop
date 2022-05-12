@@ -21,15 +21,16 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
     @Override
     public void Create(OrderInfo orderInfo) throws SQLException {
         Connection conn = ConnectionHandler.getConn();
-        String sql = "INSERT INTO OrderInfo Values(?,?,?,?,?);";
+        String sql = "INSERT INTO OrderInfo Values(?,?,?,?,?,?);";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,orderInfo.getId());
             pstmt.setString(2,orderInfo.getOrderId());
             pstmt.setString(3,orderInfo.getGoodId());
-            pstmt.setInt(4,orderInfo.getQuantify());
-            pstmt.setDouble(5,orderInfo.getPrice());
+            pstmt.setString(4,orderInfo.getGoodname());
+            pstmt.setInt(5,orderInfo.getQuantify());
+            pstmt.setDouble(6,orderInfo.getPrice());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +71,9 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
                     orderInfo.setId(rs.getString("ID"));
                     orderInfo.setOrderId(rs.getString("Oid"));
                     orderInfo.setGoodId(rs.getString("Gid"));
+                    orderInfo.setGoodname(rs.getString("name"));
                     orderInfo.setQuantify(rs.getInt("Quantify"));
+                    orderInfo.setPrice(rs.getDouble("Price"));
                     list.add(orderInfo);
 
                 }
@@ -88,7 +91,9 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
                     orderInfo.setId(rs.getString("ID"));
                     orderInfo.setOrderId(rs.getString("Oid"));
                     orderInfo.setGoodId(rs.getString("Gid"));
+                    orderInfo.setGoodname(rs.getString("name"));
                     orderInfo.setQuantify(rs.getInt("Quantify"));
+                    orderInfo.setPrice(rs.getDouble("Price"));
                     list.add(orderInfo);
                 }
             }
@@ -107,7 +112,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
         List<OrderInfo> list =new ArrayList<>();
 
         try {
-            String sql = "select * from `OrderInfo` where Oid=？";
+            String sql = "select * from `OrderInfo` where Oid=?";
             PreparedStatement pstmt = null;
             ResultSet rs = null;
 
@@ -129,6 +134,9 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
         }catch (SQLException e){
             e.printStackTrace();
         }
+//        finally {
+//            conn.close();
+//        }
         return list;
 
     }
@@ -145,5 +153,8 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
             e.printStackTrace();
             throw new SQLException("删除失败！！");
         }
+//        finally {
+//            conn.close();
+//        }
     }
 }
