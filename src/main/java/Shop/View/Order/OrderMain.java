@@ -8,7 +8,9 @@ import Shop.View.Order_Info.OrderInfoView;
 import Shop.View.Pay.payView;
 import Shop.util.ConnectionHandler;
 import Shop.util.ViewHandler;
+import cn.juntai.wxpaydemo.pay.WXPay;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.awt.*;
 
@@ -118,9 +120,19 @@ public class OrderMain extends JFrame {
         button3.addActionListener(
                 (e)->{
                     int rowNo = table1.getSelectedRow();//获取所选的行号
+                    String Oid=(String) table1.getValueAt(rowNo, 0);
+                    String Place = (String)table1.getValueAt(rowNo,1);
                     Double Aprice=(Double)table1.getValueAt(rowNo, 2);
+                    String Info = (String)table1.getValueAt(rowNo,3);
+
+                    Order order = new Order();
+                    order.setOid(Oid);
+                    order.setAprice(Aprice);
+                    order.setPlace(Place);
+                    order.setInfo(Info);
 
                     this.setVisible(false);
+                    new WXPay().unifiedOrder(order);
                     new payView(Aprice).setVisible(true);
                 }
         );
