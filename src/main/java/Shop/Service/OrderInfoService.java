@@ -15,5 +15,5 @@ public interface OrderInfoService {
     public void Update(OrderInfo orderInfo) throws SQLException;
     public List<OrderInfo> Select(OrderInfo orderInfo) throws SQLException;
     public List<OrderInfo> Select(String oid) throws SQLException;
-    public void Remove(OrderInfo orderInfo) throws SQLException;
+    public void Remove(String id) throws SQLException;
 }

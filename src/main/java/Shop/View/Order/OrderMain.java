@@ -75,6 +75,7 @@ public class OrderMain extends JFrame {
                     try {
                         orderService.Create(order);
                         new GoodMain(Oid).setVisible(true);
+                        this.dispose();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                         System.out.println("添加失败");
@@ -101,8 +102,9 @@ public class OrderMain extends JFrame {
 
 
 
+                    this.dispose();
+                    OrderInfoView orderInfo = new OrderInfoView(Oid);
 
-                    OrderInfoView orderInfo = new OrderInfoView();
                     /*UpdateOrder updateOrder = new UpdateOrder(Order);
                     updateOrder.setVisible(true);*/
                 }

@@ -39,9 +39,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     }
 
     @Override
-    public void Remove(OrderInfo orderInfo) throws SQLException {
+    public void Remove(String id) throws SQLException {
         OrderInfoDao orderInfoDao = new OrderInfoDaoImpl();
-        orderInfoDao.Remove(orderInfo);
+        orderInfoDao.Remove(id);
 
     }
 }

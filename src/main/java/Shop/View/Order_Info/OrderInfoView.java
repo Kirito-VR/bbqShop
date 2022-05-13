@@ -7,6 +7,8 @@ package Shop.View.Order_Info;
 
 import Shop.Bean.Good;
 import Shop.Bean.OrderInfo;
+import Shop.Dao.OrderInfoDaoImpl.OrderInfoDaoImpl;
+import Shop.Service.OrderInfoService;
 import Shop.Service.OrderInfoServiceImpl.OrderInfoServiceImpl;
 import Shop.View.Good.GoodMain;
 import Shop.View.Order.OrderChange;
@@ -82,10 +84,16 @@ public class OrderInfoView extends JFrame {
                     String id=(String)table1.getValueAt(rowNo, 0);
                     String name=(String)table1.getValueAt(rowNo, 1);
                     Double price=(Double)table1.getValueAt(rowNo, 2);
-
+//                    int amout = (int)table1.getValueAt(rowNo,3);
+                    OrderInfo orderInfo = new OrderInfo();
+                    orderInfo.setId(id);
+                    orderInfo.setGoodname(name);
+                    orderInfo.setPrice(price);
+//                    orderInfo.getQuantify(amout);
                     try {
                         List<OrderInfo> list  = new OrderInfoServiceImpl().Select(id);
-//                        new OrderChange();
+                        new OrderChange(orderInfo).setVisible(true);
+                        this.dispose();
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -100,10 +108,14 @@ public class OrderInfoView extends JFrame {
                 e -> {
                     int rowNo = table1.getSelectedRow();//获取所选的行号
                     String id=(String)table1.getValueAt(rowNo, 0);
-                    String name=(String)table1.getValueAt(rowNo, 1);
-                    Double price=(Double)table1.getValueAt(rowNo, 2);
 
-                    Good good=new Good(id,name,price);
+                    try {
+                        new OrderInfoDaoImpl().Remove(id);
+                        this.dispose();
+                        new OrderInfoView(this.oid).setVisible(true);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
 
                 }
         );

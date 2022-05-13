@@ -40,7 +40,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
     @Override
     public void Update(OrderInfo orderInfo) throws SQLException {
-        Remove(orderInfo);
+        Remove(orderInfo.getOrderId());
         try {
             Create(orderInfo);
         } catch (SQLException e) {
@@ -141,13 +141,13 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
 
     }
     @Override
-    public void Remove(OrderInfo orderInfo) throws SQLException {
+    public void Remove(String id) throws SQLException {
         Connection conn = ConnectionHandler.getConn();
         String sql = "DELETE FROM OrderInfo where id=?;";
 
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,orderInfo.getId());
+            pstmt.setString(1,id);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

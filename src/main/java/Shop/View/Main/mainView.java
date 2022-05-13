@@ -5,8 +5,11 @@
 package Shop.View.Main;
 
 import Shop.View.Order.OrderMain;
+import Shop.util.ConnectionHandler;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 /**
@@ -57,6 +60,14 @@ public class mainView extends JFrame {
         button4.setText("人员管理");
         contentPane.add(button4);
         button4.setBounds(220, 150, 95, 45);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                ConnectionHandler.connClose();
+            }
+        });
 
         {
             // compute preferred size
