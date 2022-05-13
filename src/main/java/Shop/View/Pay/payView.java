@@ -1,12 +1,11 @@
 /*
- * Created by JFormDesigner on Fri May 13 10:42:08 CST 2022
+ * Created by JFormDesigner on Fri May 13 19:55:54 CST 2022
  */
 
-package Shop.View.Main;
+package Shop.View.Pay;
 
-import Shop.View.Good.Management.goodManagement;
-import Shop.View.Order.OrderMain;
-import Shop.util.ConnectionHandler;
+import Shop.Bean.Order;
+import Shop.util.ViewHandler;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -16,63 +15,34 @@ import javax.swing.*;
 /**
  * @author 1
  */
-public class mainView extends JFrame {
-    public mainView() {
+public class payView extends JFrame {
+    private Double price;
+    public payView() {
         initComponents();
-
+    }
+    public payView(Double price){
+        this.price = price;
+        initComponents();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        button1 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
-        button4 = new JButton();
+        label1 = new JLabel(new ImageIcon("C:\\Users\\74260\\Desktop\\project_1\\src\\main\\resources\\new.jpg"));
 
         //======== this ========
         Container contentPane = getContentPane();
         contentPane.setLayout(null);
 
-        //---- button1 ----
-        button1.setText("订单管理");
-        contentPane.add(button1);
-        button1.setBounds(55, 60, 95, 45);
-        button1.addActionListener(
-                (e)->{
-                    this.setVisible(false);
-                    OrderMain ordermain  = new OrderMain();
-                    ordermain.setVisible(true);
-
-                }
-        );
-
-        //---- button2 ----
-        button2.setText("商品管理");
-        contentPane.add(button2);
-        button2.setBounds(225, 60, 95, 45);
-        button2.addActionListener(
-                (e)->{
-                    this.setVisible(false);
-                    new goodManagement().setVisible(true);
-                }
-        );
-
-
-        //---- button3 ----
-        button3.setText("库存管理");
-        contentPane.add(button3);
-        button3.setBounds(60, 160, 95, 45);
-
-        //---- button4 ----
-        button4.setText("人员管理");
-        contentPane.add(button4);
-        button4.setBounds(220, 150, 95, 45);
+        //---- label1 ----
+        label1.setText("请支付"+String.valueOf(price)+"元");
+        contentPane.add(label1);
+        label1.setBounds(90, 25, 650, 650);
 
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                ConnectionHandler.connClose();
+                ViewHandler.getMainView().setVisible(true);
             }
         });
 
@@ -92,14 +62,13 @@ public class mainView extends JFrame {
         }
         pack();
         setLocationRelativeTo(getOwner());
-        setDefaultCloseOperation(3);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
+
+
+        setDefaultCloseOperation(2);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

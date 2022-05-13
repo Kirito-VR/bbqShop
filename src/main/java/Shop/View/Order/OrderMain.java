@@ -5,6 +5,7 @@ import Shop.Service.OrderService;
 import Shop.Service.OrderServiceImpl.OrderServiceImpl;
 import Shop.View.Good.GoodMain;
 import Shop.View.Order_Info.OrderInfoView;
+import Shop.View.Pay.payView;
 import Shop.util.ConnectionHandler;
 import Shop.util.ViewHandler;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
@@ -116,7 +117,11 @@ public class OrderMain extends JFrame {
         button3.setBounds(545, 355, 100, 30);
         button3.addActionListener(
                 (e)->{
-                    
+                    int rowNo = table1.getSelectedRow();//获取所选的行号
+                    Double Aprice=(Double)table1.getValueAt(rowNo, 2);
+
+                    this.setVisible(false);
+                    new payView(Aprice).setVisible(true);
                 }
         );
         addWindowListener(new WindowAdapter() {
@@ -159,7 +164,7 @@ public class OrderMain extends JFrame {
 
         try {
             list = new OrderServiceImpl().Select(null);
-            
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
