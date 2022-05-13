@@ -1,18 +1,15 @@
-package Shop.View.Good;
+package Shop.View.Good.Management;
 
 import Shop.Bean.Good;
-import Shop.Bean.OrderInfo;
+import Shop.Dao.GoodDaoImpl.GoodDaoImpl;
 import Shop.Service.GoodServiceImpl.GoodServiceImpl;
-import Shop.View.Order.OrderChange;
-import Shop.util.ConnectionHandler;
+import Shop.View.Main.mainView;
 import Shop.util.ViewHandler;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.List;
-import java.sql.*;
-import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,15 +17,17 @@ import javax.swing.table.DefaultTableModel;
 /**
  * @liwei
  */
-public class GoodMain extends JFrame {
-    private String Oid;
-    public GoodMain(String Oid)  { this.Oid = Oid; initComponents();}
+public class goodManagement extends JFrame {
+    public goodManagement()  {
+        initComponents();}
 
     private void initComponents() {
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
-        // button1 = new JButton();
+        button1 = new JButton();
         button2 = new JButton();
+        button3 =new JButton();
+        button4 =new JButton();
         label1 = new JLabel();
         textField1 = new JTextField();
 
@@ -46,37 +45,64 @@ public class GoodMain extends JFrame {
         label1.setFont(new
                 Font("STHeiti Light", Font.BOLD,
                 30));
-        label1.setText("点单表");
+        label1.setText("商品管理");
         contentPane.add(label1);
         label1.setBounds(460, 0, 600, 60);
 
-        button2.setText("添加");
-        contentPane.add(button2);
-        button2.setBounds(440, 355, 100, 30);
-        button2.addActionListener(
+        button1.setText("修改");
+        contentPane.add(button1);
+        button1.setBounds(320, 350, 100, 30);
+        button1.addActionListener(
                 (e)->{
                     int rowNo = table1.getSelectedRow();//获取所选的行号
-                    String id=(String)table1.getValueAt(rowNo, 0);
-                    String name=(String)table1.getValueAt(rowNo, 1);
-                    Double price=(Double)table1.getValueAt(rowNo, 2);
-
-                    System.out.println(id);
-                    System.out.println(name);
-                    System.out.println(price);
+                    String id=String.valueOf(table1.getValueAt(rowNo,0));
+                    String name=String.valueOf(table1.getValueAt(rowNo,1));
+                    Double price=(Double) table1.getValueAt(rowNo,2);
 
                     Good good=new Good(id,name,price);
-                    OrderInfo orderinfo =new OrderInfo();
-                    orderinfo.setId(String.valueOf(System.currentTimeMillis()).substring(0,10));
-                    orderinfo.setGoodname(name);
-                    orderinfo.setPrice(price);
-                    orderinfo.setGoodId(id);
-                    orderinfo.setOrderId(this.Oid);
-                    new OrderChange(orderinfo).setVisible(true);
+                    goodUpdate change=new goodUpdate(good);
                     this.setVisible(false);
-                    /*UpdateGood updateGood=new UpdateGood(good);
-                    updateGood.setVisible(true);*/
+                    change.setVisible(true);
                 }
         );
+        button2.setText("添加");
+        contentPane.add(button2);
+        button2.setBounds(420, 350, 100, 30);
+        button2.addActionListener(
+                (e)->{
+                    this.setVisible(false);
+                    Good good=new Good();
+                    goodInsert insert=new goodInsert();
+                    insert.setVisible(true);
+                }
+        );
+
+        button3.setText("删除");
+        contentPane.add(button3);
+        button3.setBounds(520, 350, 100, 30);
+        button3.addActionListener(
+                (e)->{
+                    int rowNo = table1.getSelectedRow();//获取所选的行号
+                    String id=String.valueOf(table1.getValueAt(rowNo,0));
+                    GoodDaoImpl goodDao=new GoodDaoImpl();
+                    goodDao.Remove(id);
+                    this.setVisible(false);
+                    goodManagement management=new goodManagement();
+                    management.setVisible(true);
+                }
+        );
+
+        button4.setText("完成");
+        contentPane.add(button4);
+        button4.setBounds(620, 350, 100, 30);
+        button4.addActionListener(
+                (e)->{
+                    this.setVisible(false);
+                    mainView main=new mainView();
+                    main.setVisible(true);
+                }
+        );
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -104,7 +130,6 @@ public class GoodMain extends JFrame {
             contentPane.setPreferredSize(preferredSize);
         }
         pack();
-        //setLocationRelativeTo(getOwner());
         this.setBounds(200, 100, 1000, 415);
         this.setDefaultCloseOperation(2);
     }
@@ -133,6 +158,8 @@ public class GoodMain extends JFrame {
     private Object[][] data = null;
     private JButton button1;
     private JButton button2;
+    private JButton button3;
+    private JButton button4;
     private JTextField textField1;
     private JLabel label1;
 

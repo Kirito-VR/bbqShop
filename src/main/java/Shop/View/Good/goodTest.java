@@ -30,7 +30,7 @@ public class goodTest {
         Good.Updata(o);
     }
 
-    public void remove(Good id) throws SQLException {
+    public void remove(String id) throws SQLException {
         GoodDao Good = new GoodDaoImpl();
         Good.Remove(id);
     }
@@ -62,7 +62,7 @@ public class goodTest {
                         break;
                     case 2:Good.updataGood(newGood(input));
                         break;
-                    case 3:Good.remove(newGood(input));
+                    case 3:Good.remove(String.valueOf(newGood(input)));
                         break;
                     case 4:i=5;
                         break;

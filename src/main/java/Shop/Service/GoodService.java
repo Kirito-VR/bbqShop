@@ -12,6 +12,6 @@ import java.util.List;
 public interface GoodService {
     public void Updata(Good good);
     public List<Good> Select(Good good);
-    public void Remove(Good good);
+    public void Remove(String id);
     public void Create(Good good);
 }

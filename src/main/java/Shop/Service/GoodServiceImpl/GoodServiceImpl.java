@@ -26,9 +26,9 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
-    public void Remove(Good good) {
+    public void Remove(String id) {
         GoodDao gooddao =new GoodDaoImpl();
-        gooddao.Remove(good);
+        gooddao.Remove(id);
     }
 
     @Override
