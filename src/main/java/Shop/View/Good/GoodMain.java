@@ -92,7 +92,7 @@ public class GoodMain extends JFrame {
         pack();
         //setLocationRelativeTo(getOwner());
         this.setBounds(200, 100, 1000, 415);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(2);
     }
 
     public Object[][] getDataFromDatabase() {

@@ -9,7 +9,7 @@ import Shop.util.ConnectionHandler;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 
 import java.awt.*;
-import java.util.Date;
+
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
@@ -135,7 +135,7 @@ public class OrderMain extends JFrame {
         pack();
         //setLocationRelativeTo(getOwner());//显示界面框
         this.setBounds(300, 300, 1020, 450);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(2);
     }
 
     public Object[][] getDataFromDatabase() {

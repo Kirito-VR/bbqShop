@@ -5,6 +5,7 @@
 package Shop.View.Login;
 
 import Shop.View.Good.GoodMain;
+import Shop.View.Main.mainView;
 import Shop.View.Order.OrderMain;
 import Shop.util.ConnectionHandler;
 
@@ -72,8 +73,9 @@ public class Login extends JFrame {
                         if (rs.next()) {//让游标向下移动一次
                             System.out.println("登录成1功");
                             this.setVisible(false);
-                            OrderMain orderMain =new OrderMain();
-                            orderMain.setVisible(true);
+                            mainView main =new mainView();
+                            main.setVisible(true);
+//                            main.setVisible(true);
                         } else {
                             System.out.println("用户名或密码错误");
                         }
