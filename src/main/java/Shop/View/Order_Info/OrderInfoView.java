@@ -10,8 +10,12 @@ import Shop.Bean.OrderInfo;
 import Shop.Service.OrderInfoServiceImpl.OrderInfoServiceImpl;
 import Shop.View.Good.GoodMain;
 import Shop.View.Order.OrderChange;
+import Shop.View.Order.OrderMain;
+import Shop.util.ViewHandler;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -39,7 +43,7 @@ public class OrderInfoView extends JFrame {
         label1 = new JLabel();
         textField1 = new JTextField();
 
-        DefaultTableModel tableModel = new DefaultTableModel(null, head) {
+        DefaultTableModel tableModel = new DefaultTableModel(getDataFromDatabase(), head) {
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
@@ -63,7 +67,7 @@ public class OrderInfoView extends JFrame {
                 (e)->{
                     this.setVisible(false);
 
-                    GoodMain goodMain1 =new GoodMain();
+                    GoodMain goodMain1 =new GoodMain(this.oid);
                     goodMain1.setVisible(true);
 
                 }
@@ -109,9 +113,18 @@ public class OrderInfoView extends JFrame {
         button4.setBounds(800, 355, 100, 30);
         button4.addActionListener(
                 e -> {
-
+                    new OrderMain().setVisible(true);
+                    this.setVisible(false);
                 }
         );
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                ViewHandler.removeJframe();
+                ViewHandler.getMainView().setVisible(true);
+            }
+        });
 
 
         scrollPane1.setViewportView(table1);
@@ -134,7 +147,7 @@ public class OrderInfoView extends JFrame {
         this.setVisible(true);
         setLocationRelativeTo(getOwner());
         this.setBounds(200, 100, 1000, 415);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(2);
     }
 
     public Object[][] getDataFromDatabase() {
@@ -157,9 +170,6 @@ public class OrderInfoView extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
         return data;
     }
 

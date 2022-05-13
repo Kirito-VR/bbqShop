@@ -15,6 +15,7 @@ import javax.swing.*;
 public class mainView extends JFrame {
     public mainView() {
         initComponents();
+
     }
 
     private void initComponents() {

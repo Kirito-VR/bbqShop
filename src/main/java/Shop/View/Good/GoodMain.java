@@ -5,8 +5,11 @@ import Shop.Bean.OrderInfo;
 import Shop.Service.GoodServiceImpl.GoodServiceImpl;
 import Shop.View.Order.OrderChange;
 import Shop.util.ConnectionHandler;
+import Shop.util.ViewHandler;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,9 +22,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GoodMain extends JFrame {
     private String Oid;
-    public GoodMain() {
-        initComponents();
-    }
     public GoodMain(String Oid)  { this.Oid = Oid; initComponents();}
 
     private void initComponents() {
@@ -65,11 +65,25 @@ public class GoodMain extends JFrame {
                     System.out.println(price);
 
                     Good good=new Good(id,name,price);
-                    new OrderChange(new OrderInfo()).setVisible(true);
+                    OrderInfo orderinfo =new OrderInfo();
+                    orderinfo.setId(String.valueOf(System.currentTimeMillis()).substring(0,10));
+                    orderinfo.setGoodname(name);
+                    orderinfo.setPrice(price);
+                    orderinfo.setGoodId(id);
+                    orderinfo.setOrderId(this.Oid);
+                    new OrderChange(orderinfo).setVisible(true);
+                    this.setVisible(false);
                     /*UpdateGood updateGood=new UpdateGood(good);
                     updateGood.setVisible(true);*/
                 }
         );
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                ViewHandler.getMainView().setVisible(true);
+            }
+        });
 
         //contentPane.add(textField1);
         // textField1.setBounds(270, 355, 130, 30);
@@ -126,7 +140,4 @@ public class GoodMain extends JFrame {
     private JTextField textField1;
     private JLabel label1;
 
-    public static void main(String[] args) {
-        new GoodMain();
-    }
 }

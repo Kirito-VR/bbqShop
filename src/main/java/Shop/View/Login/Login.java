@@ -8,6 +8,7 @@ import Shop.View.Good.GoodMain;
 import Shop.View.Main.mainView;
 import Shop.View.Order.OrderMain;
 import Shop.util.ConnectionHandler;
+import Shop.util.ViewHandler;
 
 import java.awt.*;
 import java.sql.*;
@@ -74,6 +75,7 @@ public class Login extends JFrame {
                             System.out.println("登录成1功");
                             this.setVisible(false);
                             mainView main =new mainView();
+                            ViewHandler.setJframe(main);
                             main.setVisible(true);
 //                            main.setVisible(true);
                         } else {

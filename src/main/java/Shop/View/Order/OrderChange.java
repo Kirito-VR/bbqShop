@@ -3,11 +3,15 @@ package Shop.View.Order;
 import Shop.Bean.OrderInfo;
 import Shop.Dao.OrderInfoDao;
 import Shop.Dao.OrderInfoDaoImpl.OrderInfoDaoImpl;
+import Shop.View.Good.GoodMain;
+import Shop.View.Order_Info.OrderInfoView;
+import Shop.util.ViewHandler;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import sun.plugin.dom.css.RGBColor;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import javax.swing.*;
@@ -131,10 +135,23 @@ public class OrderChange extends JFrame {
             OrderInfoDao oid=new OrderInfoDaoImpl();
             try {
                 oid.Update(orderInfo);
+                OrderInfoView orderInfoview = new OrderInfoView(orderInfo.getOrderId());
+                orderInfoview.setVisible(true);
+                this.setVisible(false);
+                System.out.println(orderInfo.getOrderId());
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
             textField5.setText("修改成功！");
+        });
+
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                new GoodMain(orderInfo.getOrderId());
+            }
         });
         //---- label6 ----
         {
@@ -153,6 +170,7 @@ public class OrderChange extends JFrame {
         }
         pack();
         setLocationRelativeTo(getOwner());
+        setDefaultCloseOperation(2);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

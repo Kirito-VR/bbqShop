@@ -6,15 +6,19 @@ import Shop.Service.OrderServiceImpl.OrderServiceImpl;
 import Shop.View.Good.GoodMain;
 import Shop.View.Order_Info.OrderInfoView;
 import Shop.util.ConnectionHandler;
+import Shop.util.ViewHandler;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 
 import java.awt.*;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.View;
 
 /**
  * @wrl
@@ -112,7 +116,13 @@ public class OrderMain extends JFrame {
                     
                 }
         );
-
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                ViewHandler.getMainView().setVisible(true);
+            }
+        });
 
         {
             scrollPane1.setViewportView(table1);
