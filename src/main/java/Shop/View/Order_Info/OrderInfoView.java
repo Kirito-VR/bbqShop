@@ -10,6 +10,8 @@ import Shop.Bean.OrderInfo;
 import Shop.Dao.OrderInfoDaoImpl.OrderInfoDaoImpl;
 import Shop.Service.OrderInfoService;
 import Shop.Service.OrderInfoServiceImpl.OrderInfoServiceImpl;
+import Shop.Service.OrderService;
+import Shop.Service.OrderServiceImpl.OrderServiceImpl;
 import Shop.View.Good.GoodMain;
 import Shop.View.Order.OrderChange;
 import Shop.View.Order.OrderMain;
@@ -125,6 +127,8 @@ public class OrderInfoView extends JFrame {
         button4.setBounds(800, 355, 100, 30);
         button4.addActionListener(
                 e -> {
+                    OrderService orderService = new OrderServiceImpl();
+//                    orderService.Updata();
                     new OrderMain().setVisible(true);
                     this.setVisible(false);
                 }

@@ -3,6 +3,7 @@ package Shop.Service;
 import Shop.Bean.Order;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @Author: Cqmax
@@ -11,7 +12,8 @@ import java.sql.SQLException;
  */
 public interface OrderService {
     public void Updata(Order order) throws SQLException;
-    public void Select(Order order) throws SQLException;
+    public void Updata();
+    public List<Order> Select(Order order) throws SQLException;
     public void Remove(Order order) throws SQLException;
     public void Create(Order order) throws SQLException;
 }

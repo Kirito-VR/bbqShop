@@ -20,13 +20,43 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void Updata(Order order) throws SQLException {
         OrderDao orderDao = new OrderDaoImpl();
+
         orderDao.Updata(order);
     }
+    public void Updata(){
+        OrderDao orderDao = new OrderDaoImpl();
+        try {
+            List<Order> oidList = orderDao.Select(null);
+            Order order = null;
+            OrderInfoDao orderInfo =  new OrderInfoDaoImpl();
+            String oid = null;
+            for(int j=0;j<oidList.size();j++){
+                order = oidList.get(j);
+                oid = order.getOid();
+
+                List<OrderInfo> info_list = orderInfo.Select(oid);
+                double sum_price = 0;
+                for(int i=0;i<info_list.size();i++){
+                    sum_price+= info_list.get(i).getQuantify()*info_list.get(i).getPrice();
+                }
+                order.setAprice(sum_price);
+                orderDao.Updata(order);
+
+            }
+            // 获取所有的订单详情信息，汇总所有金额；
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 
     @Override
-    public void Select(Order order) throws SQLException {
+    public List<Order> Select(Order order) throws SQLException {
         OrderDao orderDao = new OrderDaoImpl();
-        orderDao.Select(order);
+        return orderDao.Select(order);
     }
 
     @Override
@@ -39,14 +69,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void Create(Order order) throws SQLException {
         OrderDao orderDao = new OrderDaoImpl();
-        OrderInfoDao orderInfo =  new OrderInfoDaoImpl();
-        // 获取所有的订单详情信息，汇总所有金额；
-        List<OrderInfo> info_list = orderInfo.Select(order.getOid());
-        double sum_price = 0;
-        for(int i=0;i<info_list.size();i++){
-            sum_price+= info_list.get(i).getQuantify()*info_list.get(i).getPrice();
-        }
-        order.setAprice(sum_price);
         orderDao.Create(order);
     }
 }

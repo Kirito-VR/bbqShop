@@ -26,6 +26,7 @@ import javax.swing.text.View;
 
 public class OrderMain extends JFrame {
     public OrderMain() {
+        new OrderServiceImpl().Updata();
         initComponents();
     }
 
@@ -64,7 +65,7 @@ public class OrderMain extends JFrame {
                 (e)->{
 
                     String Oid =String.valueOf(System.currentTimeMillis()).substring(0,10);
-                    String Place = "三号桌";
+                    String Place = "打包";
                     System.out.println(Oid);
                     System.out.println(Place);
                     String Info = "未完成";
@@ -103,7 +104,7 @@ public class OrderMain extends JFrame {
 
 
                     this.dispose();
-                    OrderInfoView orderInfo = new OrderInfoView(Oid);
+                    new OrderInfoView(Oid);
 
                     /*UpdateOrder updateOrder = new UpdateOrder(Order);
                     updateOrder.setVisible(true);*/
@@ -154,27 +155,11 @@ public class OrderMain extends JFrame {
 
         //List<Order> list = new OrderServiceImpl().Select(null);
 
-        java.util.List<Order> list = new ArrayList<Order>();
-        Connection conn = null;
-        PreparedStatement pstmt = null;
+        List<Order> list = new ArrayList<Order>();
 
-        String sql = "SELECT * FROM `Order`;";
-        ResultSet rs = null;
         try {
-            conn = ConnectionHandler.getConn();
-            //pstmt = conn.createStatement();
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                Order item = new Order();
-                item.setOid(rs.getString(1));
-                item.setAprice(rs.getDouble(2));
-                item.setPlace(rs.getString(3));
-                item.setInfo(rs.getString(4));
-                item.setTransaction_id(rs.getString(5));
-
-                list.add(item);
-            }
+            list = new OrderServiceImpl().Select(null);
+            
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

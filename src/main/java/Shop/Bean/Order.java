@@ -18,6 +18,10 @@ public class Order {
 
     }
 
+    public Order(String oid) {
+        Oid = oid;
+    }
+
     public String getOid() {
         return Oid;
     }

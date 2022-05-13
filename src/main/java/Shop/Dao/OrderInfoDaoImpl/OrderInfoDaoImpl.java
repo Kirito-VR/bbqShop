@@ -108,7 +108,7 @@ public class OrderInfoDaoImpl implements OrderInfoDao {
     public List<OrderInfo> Select(String oid) throws SQLException {
 
         Connection conn = ConnectionHandler.getConn();
-        System.out.println("OrderInfoDao:" + conn);
+//        System.out.println("OrderInfoDao:" + conn);
         List<OrderInfo> list =new ArrayList<>();
 
         try {

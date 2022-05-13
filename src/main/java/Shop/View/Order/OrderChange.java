@@ -1,5 +1,6 @@
 package Shop.View.Order;
 
+import Shop.Bean.Order;
 import Shop.Bean.OrderInfo;
 import Shop.Dao.OrderInfoDao;
 import Shop.Dao.OrderInfoDaoImpl.OrderInfoDaoImpl;
@@ -135,6 +136,7 @@ public class OrderChange extends JFrame {
             OrderInfoDao oid=new OrderInfoDaoImpl();
             try {
                 oid.Update(orderInfo);
+
                 OrderInfoView orderInfoview = new OrderInfoView(orderInfo.getOrderId());
                 orderInfoview.setVisible(true);
                 this.setVisible(false);
