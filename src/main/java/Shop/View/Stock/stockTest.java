@@ -55,8 +55,8 @@ public class stockTest {
         int i = 0;
 
         try {
-            while(i!=5){
-                System.out.println("请输入操作:(1.展示；2.更新；3.删除;4.插入；5.退出)");
+            while(i!=4){
+                System.out.println("请输入操作:(1.更新；2.删除;3.插入；4.退出)");
                 i = input.nextInt();
                 switch (i){
                     case 1:stock.showStock();
@@ -64,8 +64,6 @@ public class stockTest {
                     case 2:stock.updataStock(newStock(input));
                         break;
                     case 3:stock.remove(newStock(input));
-                        break;
-                    case 4:stock.create(newStock(input));
                         break;
                     default:
                         break;
