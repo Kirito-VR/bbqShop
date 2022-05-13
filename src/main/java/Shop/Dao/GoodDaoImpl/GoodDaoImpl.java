@@ -20,8 +20,24 @@ import java.util.List;
 public class GoodDaoImpl implements GoodDao {
     @Override
     public void Updata(Good good) {
-        Remove(good);
+        /*Remove(good);
         Create(good);
+*/
+        Connection conn = null;
+        try {
+            conn = ConnectionHandler.getConn();
+            String sql = "UPDATE good SET id=?,name=?,price=? WHERE id=?;";
+            // id,name,price
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,good.getId());
+            pstmt.setString(2,good.getName());
+            pstmt.setDouble(3,good.getPrice());
+            pstmt.setString(4,good.getId());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -34,10 +50,9 @@ public class GoodDaoImpl implements GoodDao {
             // id,name,price
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,good.getId());
-            pstmt.setString(1,good.getName());
-            pstmt.setDouble(1,good.getPrice());
+            pstmt.setString(2,good.getName());
+            pstmt.setDouble(3,good.getPrice());
             pstmt.executeUpdate();
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,14 +61,14 @@ public class GoodDaoImpl implements GoodDao {
     }
 
     @Override
-    public void Remove(Good good) {
+    public void Remove(String id) {
         Connection conn = null;
         try {
             conn = ConnectionHandler.getConn();
             String sql = "DELETE FROM good WHERE id=?;";
             // id
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,good.getId());
+            pstmt.setString(1,id);
             pstmt.executeUpdate();//执行查询
 
         } catch (SQLException e) {

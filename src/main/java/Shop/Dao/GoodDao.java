@@ -15,7 +15,7 @@ public interface GoodDao {
     // 新增商品
     public void Create(Good good);
     // 删除商品
-    public void Remove(Good good);
+    public void Remove(String id);
     // 查询商品
     public List<Good> Select(Good good);
 
