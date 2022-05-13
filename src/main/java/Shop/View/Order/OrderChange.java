@@ -133,6 +133,7 @@ public class OrderChange extends JFrame {
             orderInfo.setGoodId(textField2.getText());
             orderInfo.setId(textField6.getText());
             orderInfo.setGoodname(textField4.getText());
+            System.out.println(orderInfo.getGoodname());
             OrderInfoDao oid=new OrderInfoDaoImpl();
             try {
                 oid.Update(orderInfo);

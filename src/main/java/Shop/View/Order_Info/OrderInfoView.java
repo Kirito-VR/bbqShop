@@ -175,13 +175,14 @@ public class OrderInfoView extends JFrame {
             data = new Object[list.size()][head.length];
 
             for (int i = 0; i < list.size(); i++) {
-                for (int j = 0; j < head.length; j++) {
+
                     data[i][0] = list.get(i).getId();
                     data[i][1] = list.get(i).getGoodname();
+                    System.out.println(list.get(i).getGoodname()+"ashskjdfla");
                     data[i][2] = list.get(i).getPrice();
                     data[i][3] = list.get(i).getQuantify();
 
-                }
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
