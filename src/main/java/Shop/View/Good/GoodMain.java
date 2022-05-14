@@ -105,7 +105,7 @@ public class GoodMain extends JFrame {
         }
         pack();
         //setLocationRelativeTo(getOwner());
-        this.setBounds(200, 100, 1000, 415);
+        this.setBounds(200, 100, 1000, 550);
         this.setDefaultCloseOperation(2);
     }
 

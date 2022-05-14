@@ -158,7 +158,7 @@ public class OrderMain extends JFrame {
             }
             Insets insets = contentPane.getInsets();
             preferredSize.width += insets.right;
-            preferredSize.height += insets.bottom;
+            preferredSize.height += insets.bottom+100;
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }

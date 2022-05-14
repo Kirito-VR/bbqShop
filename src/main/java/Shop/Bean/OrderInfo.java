@@ -15,6 +15,13 @@ public class OrderInfo {
     private  int quantify;
     private  double price;
 
+    public OrderInfo() {
+    }
+
+    public OrderInfo(String orderIde) {
+        this.orderIde = orderIde;
+    }
+
     public void setPrice(double price) {this.price = price;}
 
     public void setId(String id) {

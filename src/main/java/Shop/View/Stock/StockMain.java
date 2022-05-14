@@ -98,7 +98,8 @@ public class StockMain extends JFrame {
         button4.setBounds(655, 355, 100, 30);
         button4.addActionListener(
                 (e)->{
-                    this.setVisible(false);
+                    this.dispose();
+                    ViewHandler.getMainView().setVisible(true);
 
                 }
         );

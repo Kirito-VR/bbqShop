@@ -11,6 +11,8 @@ import Shop.util.ConnectionHandler;
 import Shop.util.ViewHandler;
 
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.*;
 import javax.swing.*;
 /*
@@ -22,6 +24,8 @@ import javax.swing.*;
  * @author 1
  */
 public class Login extends JFrame {
+
+
     public Login() {
         initComponents();
     }
@@ -31,8 +35,9 @@ public class Login extends JFrame {
         label1 = new JLabel();
         textField1 = new JTextField("cq");
         label2 = new JLabel();
-        textField2 = new JTextField("guet1234");
+        JPasswordField textField2 = new JPasswordField("guet1234");//设置为
         button1 = new JButton();
+        JCheckBox checkBox;
 
         //======== this ========
         Container contentPane = getContentPane();
@@ -97,12 +102,26 @@ public class Login extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);//设置组件可见
+
+        checkBox = new JCheckBox("显示密码");
+        checkBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+
+                if(e.getStateChange()==ItemEvent.SELECTED){//被选中
+                    textField2.setEchoChar((char)0);
+                }else{
+                    textField2.setEchoChar('*');
+                }
+            }
+        });
+        checkBox.setBounds(300, 120, 135, 27);
+        getContentPane().add(checkBox);
     }
 
     private JLabel label1;
     private JTextField textField1;
     private JLabel label2;
-    private JTextField textField2;
+    private Object JPasswordField ;
     private JButton button1;
 
     public static void main(String[] args) {

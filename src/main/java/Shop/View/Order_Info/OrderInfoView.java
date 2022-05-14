@@ -66,7 +66,7 @@ public class OrderInfoView extends JFrame {
 
         button1.setText("添加");
         contentPane.add(button1);
-        button1.setBounds(100, 355, 100, 30);
+        button1.setBounds(100, 300, 100, 30);
         button1.addActionListener(
                 (e)->{
                     this.setVisible(false);
@@ -79,7 +79,7 @@ public class OrderInfoView extends JFrame {
 
         button2.setText("修改");
         contentPane.add(button2);
-        button2.setBounds(333, 355, 100, 30);
+        button2.setBounds(333, 300, 100, 30);
         button2.addActionListener(
                 e -> {
                     int rowNo = table1.getSelectedRow();//获取所选的行号
@@ -105,7 +105,7 @@ public class OrderInfoView extends JFrame {
 
         button3.setText("删除");
         contentPane.add(button3);
-        button3.setBounds(566, 355, 100, 30);
+        button3.setBounds(566, 300, 100, 30);
         button3.addActionListener(
                 e -> {
                     int rowNo = table1.getSelectedRow();//获取所选的行号
@@ -124,7 +124,7 @@ public class OrderInfoView extends JFrame {
 
         button4.setText("完成");
         contentPane.add(button4);
-        button4.setBounds(800, 355, 100, 30);
+        button4.setBounds(800, 300, 100, 30);
         button4.addActionListener(
                 e -> {
                     OrderService orderService = new OrderServiceImpl();
@@ -177,6 +177,7 @@ public class OrderInfoView extends JFrame {
             for (int i = 0; i < list.size(); i++) {
 
                     data[i][0] = list.get(i).getId();
+                    System.out.println(list.get(i).getId());
                     data[i][1] = list.get(i).getGoodname();
                     System.out.println(list.get(i).getGoodname()+"ashskjdfla");
                     data[i][2] = list.get(i).getPrice();

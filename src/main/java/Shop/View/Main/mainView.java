@@ -6,6 +6,7 @@ package Shop.View.Main;
 
 import Shop.View.Good.Management.goodManagement;
 import Shop.View.Order.OrderMain;
+import Shop.View.Stock.StockMain;
 import Shop.util.ConnectionHandler;
 
 import java.awt.*;
@@ -24,6 +25,7 @@ public class mainView extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        this.setSize(650,650);
         button1 = new JButton();
         button2 = new JButton();
         button3 = new JButton();
@@ -62,11 +64,18 @@ public class mainView extends JFrame {
         button3.setText("库存管理");
         contentPane.add(button3);
         button3.setBounds(60, 160, 95, 45);
+        button3.addActionListener(
+                (e)->{
+                    new StockMain().setVisible(true);
 
-        //---- button4 ----
-        button4.setText("人员管理");
-        contentPane.add(button4);
-        button4.setBounds(220, 150, 95, 45);
+                    this.setVisible(false);
+                }
+        );
+//
+//        //---- button4 ----
+//        button4.setText("人员管理");
+//        contentPane.add(button4);
+//        button4.setBounds(220, 150, 95, 45);
 
         addWindowListener(new WindowAdapter() {
             @Override

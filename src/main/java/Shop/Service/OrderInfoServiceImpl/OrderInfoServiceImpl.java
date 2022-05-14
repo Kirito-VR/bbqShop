@@ -1,5 +1,6 @@
 package Shop.Service.OrderInfoServiceImpl;
 
+import Shop.Bean.Order;
 import Shop.Bean.OrderInfo;
 import Shop.Dao.OrderInfoDao;
 import Shop.Dao.OrderInfoDaoImpl.OrderInfoDaoImpl;
@@ -29,7 +30,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public List<OrderInfo> Select(OrderInfo orderInfo) throws SQLException {
-        OrderInfoDao orderInfoDao = new OrderInfoDaoImpl();
+        List<OrderInfo> list = new OrderInfoDaoImpl().Select(orderInfo);
         return null;
     }
 
@@ -43,6 +44,25 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     public void Remove(String id) throws SQLException {
         OrderInfoDao orderInfoDao = new OrderInfoDaoImpl();
         orderInfoDao.Remove(id);
+
+    }
+
+    public static void main(String[] args) {
+        List<OrderInfo> list = null;
+        try {
+            list = new OrderInfoServiceImpl().Select(new OrderInfo("1652453092"));
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println(list.get(i).getId());
+                System.out.println(list.get(i).getGoodname());
+
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // 把集合的数据（商品信息）转换成二维数组
+
+
 
     }
 }
